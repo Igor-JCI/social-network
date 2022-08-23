@@ -2,14 +2,18 @@ import React from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogsArrayType, MessagesArrayType} from "../../App";
+import {DialogsArrayType, MessagesArrayType, PostsArrayType} from "../../App";
 
 export type DialogsPropsType = {
-    dialogs:Array<DialogsArrayType>
-    messages:Array<MessagesArrayType>
+    /*dialogs:Array<DialogsArrayType>
+    messages:Array<MessagesArrayType>*/
+
+    dialogs: Array<DialogsArrayType>
+    messages: Array<MessagesArrayType>
+
 }
 
-export const Dialogs = (props:DialogsPropsType) => {
+export const Dialogs = (props: DialogsPropsType) => {
 
     return (
         <div className={s.dialogs}>

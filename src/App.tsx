@@ -25,10 +25,24 @@ export type PostsArrayType = {
     likesCount: number
 }
 
+type dialogsPageType ={
+    dialogs:Array<DialogsArrayType>
+    messages:Array<MessagesArrayType>
+}
+
+type profilePageType ={
+    posts:Array<PostsArrayType>
+}
+
+type StateType = {
+    dialogsPage: dialogsPageType
+    profilePage: profilePageType
+}
 export type AppPropsType = {
-    dialogs: Array<DialogsArrayType>
+  /*  dialogs: Array<DialogsArrayType>
     messages: Array<MessagesArrayType>
-    posts: Array<PostsArrayType>
+    posts: Array<PostsArrayType>*/
+    state:StateType
 }
 
 
@@ -39,8 +53,8 @@ const App = (props: AppPropsType) => {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-                    <Route path="/profile" render={() => <Profile posts={props.posts}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogs = {props.state.dialogsPage.dialogs} messages ={props.state.dialogsPage.messages}/>}/>
+                    <Route path="/profile" render={() => <Profile posts ={props.state.profilePage.posts}/> }/>
                     <Route path="/News" render={() => <News/>}/>
                     <Route path="/Music" render={() => <Music/>}/>
                     <Route path="/Settings" render={() => <Settings/>}/>
