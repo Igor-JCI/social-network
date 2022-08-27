@@ -26,16 +26,16 @@ export type PostsArrayType = {
     likesCount: number
 }
 
-type dialogsPageType = {
+export type dialogsPageType = {
     dialogs: Array<DialogsArrayType>
     messages: Array<MessagesArrayType>
 }
 
-type profilePageType = {
+export type profilePageType = {
     posts: Array<PostsArrayType>
 }
 
-type StateType = {
+export type StateType = {
     dialogsPage: dialogsPageType
     profilePage: profilePageType
 }

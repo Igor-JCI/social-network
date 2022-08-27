@@ -1,4 +1,5 @@
 import React from "react";
+import {rerenderEntireTree} from "../render";
 
 let state = {
     profilePage: {
@@ -35,6 +36,7 @@ debugger
     }
 
     state.profilePage.posts.push(NewPost)
+    rerenderEntireTree(state)
 }
 
 export default state
