@@ -10,9 +10,7 @@ type MyPostsPropsType ={
 
 
 const MyPosts = (props:MyPostsPropsType) => {
-
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-
     let addPost = () => {
         debugger
         let text = newPostElement.current?.value;
@@ -33,13 +31,9 @@ const MyPosts = (props:MyPostsPropsType) => {
                 </div>
             </div>
             <div className={s.posts}>
-
                 {
                     props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
                 }
-
-                {/* <Post message={posts[0].message} likesCount= {posts[0].likesCount}/>
-                <Post message={posts[1].message} likesCount= {posts[1].likesCount}/>*/}
             </div>
         </div>
     )

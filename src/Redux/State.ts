@@ -1,4 +1,3 @@
-import React from "react";
 import {rerenderEntireTree} from "../render";
 
 let state = {
@@ -34,7 +33,6 @@ debugger
         message: postMessage,
         likesCount: 0
     }
-
     state.profilePage.posts.push(NewPost)
     rerenderEntireTree(state)
 }

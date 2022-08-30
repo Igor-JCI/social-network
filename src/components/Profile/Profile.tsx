@@ -4,7 +4,6 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsArrayType} from "../../App";
 
 type ProfilePropsType = {
-    /*posts:Array<PostsArrayType>*/
     posts: Array<PostsArrayType>
     addPost:(postMessage:string)=>void
 }

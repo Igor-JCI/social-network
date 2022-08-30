@@ -8,7 +8,6 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
-import {addPost} from "./Redux/State";
 
 export type DialogsArrayType = {
     id: string
@@ -40,9 +39,6 @@ export type StateType = {
     profilePage: profilePageType
 }
 export type AppPropsType = {
-    /*  dialogs: Array<DialogsArrayType>
-      messages: Array<MessagesArrayType>
-      posts: Array<PostsArrayType>*/
     state: StateType
     addPost: (postMessage: string) => void
 }
@@ -64,12 +60,6 @@ const App = (props: AppPropsType) => {
                     <Route path="/News" render={() => <News/>}/>
                     <Route path="/Music" render={() => <Music/>}/>
                     <Route path="/Settings" render={() => <Settings/>}/>
-
-                    {/* <Route path="/dialogs" component={Dialogs}/>
-                    <Route path="/profile" component={Profile}/>
-                    <Route path="/News" component={News}/>
-                    <Route path="/Music" component={Music}/>
-                    <Route path="/Settings" component={Settings}/>*/}
                 </div>
             </div>
         </BrowserRouter>
