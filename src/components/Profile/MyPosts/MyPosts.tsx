@@ -14,6 +14,7 @@ type MyPostsPropsType = {
 const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
+        debugger
         props.addPost()
     }
     const onPostChange = () => {
