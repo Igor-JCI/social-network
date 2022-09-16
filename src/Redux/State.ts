@@ -4,12 +4,22 @@ import {StateType} from "../App";
 export type StoreType = {
     _state: StateType
     _callSubscriber: (_state: StateType) => void
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
+    _updateNewPostText: (newText: string) => void
+    _addPost: () => void
     subscribe: (observer: (state: StateType) => void) => void
     getState: () => StateType
+    dispatch: (action:ActionsType) => void
 }
 
+type AddPostActionType = {
+    type: "ADD-POST"
+}
+
+type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT",
+    newText: string
+}
+export type ActionsType = AddPostActionType |UpdateNewPostTextActionType
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -37,29 +47,39 @@ let store: StoreType = {
             ]
         }
     },
+
     getState() {
         return this._state
     },
     _callSubscriber(_state: StateType) {
         console.log("State changed")
     },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
-    addPost() {
-        debugger
-        let NewPost = {
-            id: "3",
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(NewPost)
-        this.updateNewPostText("")
-        this._callSubscriber(this._state)
-    },
     subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer
+    },
+
+     _updateNewPostText(newText: string) {
+         this._state.profilePage.newPostText = newText
+         this._callSubscriber(this._state)
+     },
+     _addPost() {
+         debugger
+         let NewPost = {
+             id: "3",
+             message: this._state.profilePage.newPostText,
+             likesCount: 0
+         }
+         this._state.profilePage.posts.push(NewPost)
+         this._updateNewPostText("")
+         this._callSubscriber(this._state)
+     },
+
+    dispatch(action) {
+        if (action.type === "ADD-POST") {
+           this._addPost()
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._updateNewPostText(action.newText)
+        }
     }
 }
 
