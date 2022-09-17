@@ -1,5 +1,6 @@
 import {StateType} from "../App";
-
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
 export type StoreType = {
     _state: StateType
@@ -16,10 +17,27 @@ type AddPostActionType = {
 }
 
 type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT",
+    type:"UPDATE-NEW-POST-TEXT",
     newText: string
 }
 export type ActionsType = AddPostActionType |UpdateNewPostTextActionType
+
+export const addPostAC = ():AddPostActionType => ({type: ADD_POST})
+
+export const updateNewPostTextAC = (text:string):UpdateNewPostTextActionType =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
+/*export const addPostAC = ():AddPostActionType => {
+    return {
+        type: ADD_POST
+    }
+}
+export const updateNewPostTextAC = (text:string):UpdateNewPostTextActionType => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }
+}*/
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -75,10 +93,12 @@ let store: StoreType = {
      },
 
     dispatch(action) {
-        if (action.type === "ADD-POST") {
+        if (action.type === ADD_POST) {
            this._addPost()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._updateNewPostText(action.newText)
+        } else {
+            if (action.type === UPDATE_NEW_POST_TEXT) {
+                        this._updateNewPostText(action.newText)
+                    }
         }
     }
 }
