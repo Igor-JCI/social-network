@@ -7,8 +7,6 @@ import {ActionsType, addPostAC, updateNewPostTextAC} from "../../../Redux/State"
 type MyPostsPropsType = {
     posts: Array<PostsArrayType>
     newPostText: string
-   /* addPost: () => void
-    updateNewPostText: (newText: string) => void*/
     dispatch:(action:ActionsType) => void
 }
 
