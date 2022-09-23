@@ -44,8 +44,6 @@ export type StateType = {
 }
 export type AppPropsType = {
     state: StateType
-   /* addPost: () => void
-    updateNewPostText:(newText: string) => void*/
     dispatch: (action:ActionsType) => void
 }
 
