@@ -14,7 +14,6 @@ export type DialogsPropsType = {
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
-
     const onChangeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.target.value
         if (text) {
@@ -22,7 +21,6 @@ export const Dialogs = (props: DialogsPropsType) => {
         }
 
     }
-
     const addMessage = () => {
         props.dispatch(addMessageTextAC())
     }

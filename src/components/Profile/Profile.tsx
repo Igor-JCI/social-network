@@ -6,8 +6,6 @@ import {ActionsType} from "../../Redux/State";
 
 type ProfilePropsType = {
     posts: Array<PostsArrayType>
-   /* addPost:()=>void
-    updateNewPostText:(newText: string) => void*/
     newPostText:string
     dispatch:(action:ActionsType) => void
 
