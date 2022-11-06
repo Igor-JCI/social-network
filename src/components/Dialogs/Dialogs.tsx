@@ -3,7 +3,8 @@ import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsArrayType, MessagesArrayType} from "../../App";
-import {ActionsType, addMessageTextAC, updateNewMessageTextAC} from "../../Redux/State";
+import {addMessageTextAC, updateNewMessageTextAC} from "../../Redux/Dialogs-reducer";
+import {ActionsType} from "../../Redux/State";
 
 export type DialogsPropsType = {
     dialogs: Array<DialogsArrayType>
@@ -38,7 +39,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                     props.messages.map(m => <Message message={m.message}/>)
                 }
                 <div>
-                    <textarea value={props.newMessageText} onChange={onChangeMessageText}></textarea>
+                    <textarea value={props.newMessageText} onChange={onChangeMessageText} placeholder="Enter your message"></textarea>
                     <button onClick={addMessage}>addMessage</button>
                 </div>
             </div>

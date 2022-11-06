@@ -2,7 +2,8 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {PostsArrayType} from "../../../App";
-import {ActionsType, addPostAC, updateNewPostTextAC} from "../../../Redux/State";
+import {addPostAC, updateNewPostTextAC} from "../../../Redux/Profile-reducer";
+import {ActionsType} from "../../../Redux/State";
 
 type MyPostsPropsType = {
     posts: Array<PostsArrayType>
@@ -16,7 +17,6 @@ type MyPostsPropsType = {
 const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {
-        debugger
         props.dispatch(addPostAC())
     }
     const onPostChange = () => {
