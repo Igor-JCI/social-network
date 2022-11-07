@@ -4,7 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsArrayType, MessagesArrayType} from "../../App";
 import {addMessageTextAC, updateNewMessageTextAC} from "../../Redux/Dialogs-reducer";
-import {ActionsType} from "../../Redux/State";
+import {ActionsType} from "../../Redux/Store";
 
 export type DialogsPropsType = {
     dialogs: Array<DialogsArrayType>
