@@ -19,7 +19,7 @@ export const rerenderEntireTree = (state: StateType) => {
 
 
 rerenderEntireTree(store.getState())
-store.subscribe(()=>{
+store.subscribe(() => {
     let state = store.getState()
     rerenderEntireTree(state)
 })

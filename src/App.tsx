@@ -9,6 +9,7 @@ import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {ActionsType} from "./Redux/Store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 export type DialogsArrayType = {
@@ -30,12 +31,12 @@ export type PostsArrayType = {
 export type dialogsPageType = {
     dialogs: Array<DialogsArrayType>
     messages: Array<MessagesArrayType>
-    newMessageText:string
+    newMessageText: string
 }
 
 export type profilePageType = {
     posts: Array<PostsArrayType>
-    newPostText:string
+    newPostText: string
 }
 
 export type StateType = {
@@ -44,7 +45,7 @@ export type StateType = {
 }
 export type AppPropsType = {
     state: StateType
-    dispatch: (action:ActionsType) => void
+    dispatch: (action: ActionsType) => void
 }
 
 
@@ -55,15 +56,16 @@ const App = (props: AppPropsType) => {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                                  messages={props.state.dialogsPage.messages}
-                                                                  newMessageText = {props.state.dialogsPage.newMessageText}
-                                                                  dispatch = {props.dispatch}
+                    <Route path="/dialogs" render={() => <DialogsContainer
+                        dialogs={props.state.dialogsPage.dialogs}
+                        messages={props.state.dialogsPage.messages}
+                        newMessageText={props.state.dialogsPage.newMessageText}
+                        dispatch={props.dispatch}
                     />}/>
                     <Route path="/profile" render={() => <Profile
                         posts={props.state.profilePage.posts}
                         dispatch={props.dispatch}
-                        newPostText = {props.state.profilePage.newPostText}
+                        newPostText={props.state.profilePage.newPostText}
 
                     />}/>
                     <Route path="/News" render={() => <News/>}/>

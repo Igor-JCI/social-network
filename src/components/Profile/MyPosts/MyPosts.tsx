@@ -8,21 +8,20 @@ import {ActionsType} from "../../../Redux/Store";
 type MyPostsPropsType = {
     posts: Array<PostsArrayType>
     newPostText: string
-    dispatch:(action:ActionsType) => void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
-
-
 
 
 const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    let addPost = () => {
-        props.dispatch(addPostAC())
+    let onAddPost = () => {
+        props.addPost()
     }
     const onPostChange = () => {
         let text = newPostElement.current?.value;
         if (text) {
-            props.dispatch(updateNewPostTextAC(text))
+            props.updateNewPostText(text)
         }
     }
     return (
@@ -33,7 +32,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add Post</button>
+                    <button onClick={onAddPost}>Add Post</button>
                 </div>
             </div>
             <div className={s.posts}>
