@@ -9,7 +9,8 @@ import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {ActionsType} from "./Redux/Store";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
 
 
 export type DialogsArrayType = {
