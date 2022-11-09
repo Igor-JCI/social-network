@@ -44,8 +44,8 @@ export type StateType = {
     profilePage: profilePageType
 }
 export type AppPropsType = {
-    state: StateType
-    dispatch: (action: ActionsType) => void
+   /* state: StateType
+    dispatch: (action: ActionsType) => void*/
 }
 
 
@@ -57,15 +57,15 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() => <DialogsContainer
-                        dialogs={props.state.dialogsPage.dialogs}
+                        /*dialogs={props.state.dialogsPage.dialogs}
                         messages={props.state.dialogsPage.messages}
                         newMessageText={props.state.dialogsPage.newMessageText}
-                        dispatch={props.dispatch}
+                        dispatch={props.dispatch}*/
                     />}/>
                     <Route path="/profile" render={() => <Profile
-                        posts={props.state.profilePage.posts}
+                       /* posts={props.state.profilePage.posts}
                         dispatch={props.dispatch}
-                        newPostText={props.state.profilePage.newPostText}
+                        newPostText={props.state.profilePage.newPostText}*/
 
                     />}/>
                     <Route path="/News" render={() => <News/>}/>
