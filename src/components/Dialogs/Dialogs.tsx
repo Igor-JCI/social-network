@@ -10,7 +10,7 @@ export type DialogsPropsType = {
     messages: Array<MessagesArrayType>
     newMessageText: string
     addMessage: () => void
-    onChangeMessageText:(text:string) => void
+    onChangeMessageText: (text: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -29,13 +29,13 @@ export const Dialogs = (props: DialogsPropsType) => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {
-                    props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+                    props.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>)
                 }
             </div>
 
             <div className={s.messages}>
                 {
-                    props.messages.map(m => <Message message={m.message}/>)
+                    props.messages.map(m => <Message message={m.message} key={m.id}/>)
                 }
                 <div>
                     <textarea value={props.newMessageText} onChange={onChangeMessageText}

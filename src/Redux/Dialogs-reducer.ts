@@ -14,9 +14,9 @@ type messagesArrayType = {
     message: string
 }
 type initialStateType = {
-    dialogs:Array<dialogsArrayType>
-    messages:Array<messagesArrayType>
-    newMessageText:string
+    dialogs: Array<dialogsArrayType>
+    messages: Array<messagesArrayType>
+    newMessageText: string
 }
 
 let initialState = {
@@ -40,19 +40,40 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action: ActionsType) => {
 
-    switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.text
-            return state
+    /*let stateCopy = {...state}
+    stateCopy.messages = [...state.messages]*/
 
-        case ADD_MESSAGE:
-            let NewMessage = {
-                id: "6",
-                message: state.newMessageText
+
+    switch (action.type) {
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            /*let stateCopy = {
+                ...state,
+                newMessageText: action.text
             }
-            state.messages.push(NewMessage)
-            state.newMessageText = ""
-            return state
+            return stateCopy*/
+            return {
+                ...state,
+                newMessageText: action.text
+            }
+        }
+
+        case ADD_MESSAGE: {
+            /*let text = state.newMessageText
+            let stateCopy = {
+                ...state,
+                newMessageText: "",
+                messages: [...state.messages, {id: "6", message: text}]
+            }
+            return stateCopy*/
+
+            let text = state.newMessageText
+            return {
+                ...state,
+                newMessageText: "",
+                messages: [...state.messages, {id: "6", message: text}]
+            }
+        }
+
         default:
             return state
     }
