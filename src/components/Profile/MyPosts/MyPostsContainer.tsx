@@ -5,6 +5,7 @@ import {ActionsType} from "../../../Redux/Store";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {RootStateType} from "../../../Redux/Redux-store";
 
 type MyPostsContainerPropsType = {
     /* posts: Array<PostsArrayType>
@@ -39,7 +40,7 @@ type MyPostsContainerPropsType = {
     )
 }*/
 
-let mapStateToProps = (state:StateType) => {
+let mapStateToProps = (state:RootStateType) => {
     return {
         posts:state.profilePage.posts,
         newPostText:state.profilePage.newPostText

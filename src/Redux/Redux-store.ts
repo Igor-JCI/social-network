@@ -1,15 +1,18 @@
 import React from "react";
 import {combineReducers, legacy_createStore as createStore} from "redux";
-import ProfileReducer from "./Profile-reducer";
-import DialogsReducer from "./Dialogs-reducer";
+import {usersReducer} from "./Users-reducer";
+import dialogsReducer from "./Dialogs-reducer";
+import profileReducer from "./Profile-reducer";
 
 const reducers = combineReducers({
-    profilePage: ProfileReducer,
-    dialogsPage: DialogsReducer
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    usersPage: usersReducer
 })
 
-let store = createStore(reducers)
+export type RootStateType = ReturnType<typeof reducers>
 
+let store = createStore(reducers)
 
 
 export default store

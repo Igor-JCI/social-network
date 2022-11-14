@@ -9,6 +9,7 @@ import {Dialogs} from "./Dialogs";
 
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {RootStateType} from "../../Redux/Redux-store";
 
 export type DialogsContainerPropsType = {
     /* dialogs: Array<DialogsArrayType>
@@ -49,7 +50,7 @@ export type DialogsContainerPropsType = {
     )
 }*/
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: RootStateType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,

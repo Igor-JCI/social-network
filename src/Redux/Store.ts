@@ -1,7 +1,7 @@
 import {StateType} from "../App";
 import profileReducer from "./Profile-reducer";
 import dialogsReducer from "./Dialogs-reducer";
-
+import {InitialStateType, UsersType} from "./Users-reducer";
 
 export type StoreType = {
     _state: StateType
@@ -14,6 +14,7 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionsType) => void
 }
+
 type AddPostActionType = {
     type: "ADD-POST"
 }
@@ -28,12 +29,27 @@ type UpdateNewMessageTextActionType = {
     type: "UPDATE-NEW-MESSAGE-TEXT",
     text: string
 }
+export type FollowActionType = {
+    type: "FOLLOW",
+    userId: string
+}
+export type UnFollowActionType = {
+    type: "UNFOLLOW",
+    userId: string
+}
+export type SetUsersActionType = {
+    type: "SET_USERS",
+    users: Array<UsersType>
+}
+
 export type ActionsType =
     AddPostActionType
     | UpdateNewPostTextActionType
     | UpdateNewMessageTextActionType
     | AddMessageTextActionType
-
+    | FollowActionType
+    | UnFollowActionType
+    | SetUsersActionType
 
 
 let store: StoreType = {
