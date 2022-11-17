@@ -1,15 +1,6 @@
 import React, {FC} from "react";
-import {UsersType} from "../../Redux/Users-reducer";
 import {CommonType} from "./UsersContainer";
 import styles from "./users.module.css";
-
-//
-// type UsersPropsType = {
-//     addFollow: (userId: string) => void,
-//     addUnfollow: (userId: string) => void,
-//     setUsers: (users: Array<UsersType>) => void
-//
-// }
 
 const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
 
