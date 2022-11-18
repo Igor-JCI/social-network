@@ -10,13 +10,11 @@ import {RootStateType} from "../../Redux/Redux-store";
 type mstpType = {
     users: Array<UsersType>
 }
-
 type mdtpType = {
-    follow: (userId: string) => void,
-    unfollow: (userId: string) => void,
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void,
     setUsers: (users: Array<UsersType>) => void
 }
-
 export type CommonType = mstpType & mdtpType
 
 let mapStateToProps = (state: RootStateType): mstpType => {
@@ -27,10 +25,10 @@ let mapStateToProps = (state: RootStateType): mstpType => {
 
 let mapDispatchToProps = (dispatch:Dispatch): mdtpType => {
     return {
-        follow: (userId:string) => {
+        follow: (userId:number) => {
             dispatch(followAC(userId))
         },
-        unfollow: (userId:string)=> {
+        unfollow: (userId:number)=> {
             dispatch(unfollowAC(userId))
         },
         setUsers: (users:Array<UsersType>) => {

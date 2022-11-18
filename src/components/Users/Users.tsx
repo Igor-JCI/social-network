@@ -1,39 +1,15 @@
 import React, {FC} from "react";
 import {CommonType} from "./UsersContainer";
 import styles from "./users.module.css";
+import axios from "axios";
+import userPhoto from "../../assets/images/user.png"
 
 const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
 
     if (users.length === 0) {
-        setUsers(
-            [
-                {
-                    id: "1",
-                    photoUrl: "https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg",
-                    followed: false,
-                    fullName: "Dmitry",
-                    status: "I am boss",
-                    location: {city: "Minsk", country: "Belarus"}
-                },
-                {
-                    id: "2",
-                    photoUrl: "https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg",
-                    followed: true,
-                    fullName: "Sasha",
-                    status: "I am boss too",
-                    location: {city: "Moscow", country: "Russia"}
-                },
-                {
-                    id: "3",
-                    photoUrl: "https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg",
-                    followed: false,
-                    fullName: "Andrew",
-                    status: "I am boss too",
-                    location: {city: "Kiev", country: "Ukraine"}
-                }
-            ]
-        )
-
+        axios.get("https://social-network.samuraijs.com/api/1.0/users/").then(response => {
+            setUsers(response.data.items)
+        })
     }
 
 
@@ -42,8 +18,16 @@ const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
             {
                 users.map(u => <div key={u.id}>
                     <span>
+                        {/*{
+                            u.photos.small &&
+                            <div>
+                                <img src={u.photos.small} className={styles.userPhoto}/>
+                            </div>
+                        }*/}
+
                         <div>
-                            <img src={u.photoUrl} className={styles.userPhoto}/>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto}
+                                     className={styles.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
@@ -57,12 +41,12 @@ const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
                     </span>
                     <span>
                         <span>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                         </span>
                     </span>
 

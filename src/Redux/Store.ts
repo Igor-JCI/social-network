@@ -31,11 +31,11 @@ type UpdateNewMessageTextActionType = {
 }
 export type FollowActionType = {
     type: "FOLLOW",
-    userId: string
+    userId: number
 }
 export type UnFollowActionType = {
     type: "UNFOLLOW",
-    userId: string
+    userId: number
 }
 export type SetUsersActionType = {
     type: "SET_USERS",
