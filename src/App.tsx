@@ -47,8 +47,6 @@ export type StateType = {
     profilePage: profilePageType
 }
 export type AppPropsType = {
-   /* state: StateType
-    dispatch: (action: ActionsType) => void*/
 }
 
 
