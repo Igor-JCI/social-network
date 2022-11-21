@@ -6,15 +6,18 @@ import userPhoto from "../../assets/images/user.png"
 
 const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
 
-    if (users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users/").then(response => {
-            setUsers(response.data.items)
-        })
+    let getUsers = () => {
+        if (users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users/").then(response => {
+                setUsers(response.data.items)
+            })
+        }
     }
 
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {
                 users.map(u => <div key={u.id}>
                     <span>
