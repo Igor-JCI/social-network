@@ -2,6 +2,8 @@ import React, {FC} from "react";
 import userPhoto from "../../assets/images/user.png";
 import styles from "./users.module.css";
 import axios from "axios";
+import {UsersType} from "../../Redux/Users-reducer";
+import {CommonType} from "./UsersContainer";
 
 
 /*const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
@@ -59,13 +61,15 @@ import axios from "axios";
     )
 }*/
 
-class Users extends React.Component<any, any> {
-    constructor(props) {
+export class Users extends React.Component<CommonType> {
+    constructor(props: CommonType) {
         super(props);
+    }
+
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users/").then(response => {
             this.props.setUsers(response.data.items)
         })
-
     }
 
     /*getUsers = () => {
@@ -75,12 +79,11 @@ class Users extends React.Component<any, any> {
             })
         }
     }*/
-
     render() {
         return (
             <div>
                 {
-                    this.props.users.map(u => <div key={u.id}>
+                    this.props.users.map((u: UsersType) => <div key={u.id}>
                     <span>
                         {/*{
                             u.photos.small &&
