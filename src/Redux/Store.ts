@@ -42,6 +42,17 @@ export type SetUsersActionType = {
     users: Array<UsersType>
 }
 
+export type SetCurrentPageType = {
+    type: "SET_CURRENT_PAGE",
+    currentPage: number
+}
+
+export type setUsersTotalCountType = {
+    type: "SET_TOTAL_USERS_COUNT",
+    count: number
+}
+
+
 export type ActionsType =
     AddPostActionType
     | UpdateNewPostTextActionType
@@ -50,6 +61,8 @@ export type ActionsType =
     | FollowActionType
     | UnFollowActionType
     | SetUsersActionType
+    | SetCurrentPageType
+    | setUsersTotalCountType
 
 
 let store: StoreType = {

@@ -16,6 +16,7 @@ const Users: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
 
 
     return (
+
         <div>
             <button onClick={getUsers}>Get Users</button>
             {
