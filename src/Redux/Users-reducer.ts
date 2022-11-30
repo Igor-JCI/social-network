@@ -43,32 +43,6 @@ let initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 2
-    /*    users: [
-            {
-                id: "1",
-                photoUrl: "https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg",
-                followed: false,
-                fullName: "Dmitry",
-                status: "I am boss",
-                location: {city: "Minsk", country: "Belarus"}
-            },
-            {
-                id: "2",
-                photoUrl: "https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg",
-                followed: true,
-                fullName: "Sasha",
-                status: "I am boss too",
-                location: {city: "Moscow", country: "Russia"}
-            },
-            {
-                id: "3",
-                photoUrl: "https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg",
-                followed: false,
-                fullName: "Andrew",
-                status: "I am boss too",
-                location: {city: "Kiev", country: "Ukraine"}
-            }
-        ]*/
 }
 
 

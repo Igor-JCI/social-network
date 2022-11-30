@@ -1,40 +1,34 @@
-import React from "react";
+import React, {FC} from "react";
+import {CommonType} from "./UsersContainer";
 import styles from "./users.module.css";
+import axios from "axios";
 import userPhoto from "../../assets/images/user.png"
-import {UsersType} from "../../Redux/Users-reducer";
 
-type UsersPropsType = {
-    totalUsersCount:number,
-    pageSize:number,
-    currentPage:number,
-    onPageChanged:(pageNumber: number) => void,
-    follow: (userId: number) => void,
-    unfollow: (userId: number) => void,
-    users: Array<UsersType>
-}
+const OldUsers: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
 
-const Users = (props:UsersPropsType) => {
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-    let pages = []
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i)
+    let getUsers = () => {
+        if (users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users/").then(response => {
+                setUsers(response.data.items)
+            })
+        }
     }
+
+
     return (
 
         <div>
-            <div>
-                {pages.map(p => {
-                    return <span
-                        className={props.currentPage === p ? styles.selectedPage : ''}
-                        onClick={(e: React.MouseEvent<HTMLElement>) => {
-                            props.onPageChanged(p)
-                        }}>{p}</span>
-                })}
-            </div>
+            <button onClick={getUsers}>Get Users</button>
             {
-                props.users.map((u: UsersType) => <div key={u.id}>
+                users.map(u => <div key={u.id}>
                     <span>
+                        {/*{
+                            u.photos.small &&
+                            <div>
+                                <img src={u.photos.small} className={styles.userPhoto}/>
+                            </div>
+                        }*/}
+
                         <div>
                                 <img src={u.photos.small != null ? u.photos.small : userPhoto}
                                      className={styles.userPhoto}/>
@@ -42,10 +36,10 @@ const Users = (props:UsersPropsType) => {
                         <div>
                             {u.followed
                                 ? <button onClick={() => {
-                                    props.unfollow(u.id)
+                                    unfollow(u.id)
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    props.follow(u.id)
+                                    follow(u.id)
                                 }}>Follow</button>}
                         </div>
                     </span>
@@ -66,4 +60,4 @@ const Users = (props:UsersPropsType) => {
     )
 }
 
-export default Users
+export default OldUsers
