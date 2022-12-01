@@ -104,34 +104,6 @@ let store: StoreType = {
         this._callSubscriber = observer
     },
 
-    // _addPost() {
-    //     let NewPost = {
-    //         id: "3",
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(NewPost)
-    //     this._updateNewPostText("")
-    //     this._callSubscriber(this._state)
-    // },
-    /*_updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },*/
-    /* _addMessage() {
-         let NewMessage = {
-             id: "6",
-             message: this._state.dialogsPage.newMessageText
-         }
-         this._state.dialogsPage.messages.push(NewMessage)
-         this._updateNewMessageText("")
-         this._callSubscriber(this._state)
-     },*/
-    /* _updateNewMessageText(text: string) {
-         this._state.dialogsPage.newMessageText = text
-         this._callSubscriber(this._state)
-     },*/
-
     dispatch(action) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action)
