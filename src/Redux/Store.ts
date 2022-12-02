@@ -109,34 +109,6 @@ let store: StoreType = {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber(this._state)
-
-        /*   if (action.type === ADD_POST) {
-               let NewPost = {
-                   id: "3",
-                   message: this._state.profilePage.newPostText,
-                   likesCount: 0
-               }
-               this._state.profilePage.posts.push(NewPost)
-               this._state.profilePage.newPostText = ""
-               this._callSubscriber(this._state)
-
-           } else if (action.type === UPDATE_NEW_POST_TEXT) {
-               this._state.profilePage.newPostText = action.newText
-               this._callSubscriber(this._state)
-
-           } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-               this._state.dialogsPage.newMessageText = action.text
-               this._callSubscriber(this._state)
-
-           } else if (action.type === ADD_MESSAGE) {
-               let NewMessage = {
-                   id: "6",
-                   message: this._state.dialogsPage.newMessageText
-               }
-               this._state.dialogsPage.messages.push(NewMessage)
-               this._state.dialogsPage.newMessageText = ""
-               this._callSubscriber(this._state)
-           }*/
     }
 }
 export default store
