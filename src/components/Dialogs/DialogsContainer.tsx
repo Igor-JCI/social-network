@@ -14,37 +14,6 @@ export type DialogsContainerPropsType = {
 
 }
 
-/*export const DialogsContainer = (props: DialogsContainerPropsType) => {
-
-
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const onChangeMessageText = (text: string) => {
-                        store.dispatch(updateNewMessageTextAC(text))
-
-                    }
-                    const addMessage = () => {
-                        store.dispatch(addMessageTextAC())
-                    }
-                    return (
-                        <Dialogs
-                            dialogs={store.getState().dialogsPage.dialogs}
-                            messages={store.getState().dialogsPage.messages}
-                            newMessageText={store.getState().dialogsPage.newMessageText}
-                            addMessage={addMessage}
-                            onChangeMessageText={onChangeMessageText}
-                        />
-                    )
-                }
-            }
-        </StoreContext.Consumer>
-
-
-    )
-}*/
-
 let mapStateToProps = (state: RootStateType) => {
     return {
         dialogs: state.dialogsPage.dialogs,
