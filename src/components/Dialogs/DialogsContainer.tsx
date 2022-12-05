@@ -7,10 +7,6 @@ import {Dispatch} from "redux";
 import {RootStateType} from "../../Redux/Redux-store";
 
 export type DialogsContainerPropsType = {
-    /* dialogs: Array<DialogsArrayType>
-     messages: Array<MessagesArrayType>
-     newMessageText: string
-     dispatch: (action: ActionsType) => void*/
 
 }
 
