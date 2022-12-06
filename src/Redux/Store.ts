@@ -41,15 +41,17 @@ export type SetUsersActionType = {
     type: "SET_USERS",
     users: Array<UsersType>
 }
-
 export type SetCurrentPageType = {
     type: "SET_CURRENT_PAGE",
     currentPage: number
 }
-
 export type setUsersTotalCountType = {
     type: "SET_TOTAL_USERS_COUNT",
     count: number
+}
+export type setIsFetchingType = {
+    type: "TOGGLE_IS_FETCHING",
+    isFetching: boolean
 }
 
 
@@ -63,6 +65,7 @@ export type ActionsType =
     | SetUsersActionType
     | SetCurrentPageType
     | setUsersTotalCountType
+    | setIsFetchingType
 
 
 let store: StoreType = {

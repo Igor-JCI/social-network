@@ -2,7 +2,7 @@ import React from "react";
 import {
     ActionsType,
     FollowActionType,
-    SetCurrentPageType,
+    SetCurrentPageType, setIsFetchingType,
     SetUsersActionType,
     setUsersTotalCountType,
     UnFollowActionType
@@ -13,6 +13,7 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
 
 type LocationsType = {
@@ -42,7 +43,8 @@ let initialState = {
     users: [] as UsersType[],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 2
+    currentPage: 2,
+    isFetching: true
 }
 
 
@@ -76,7 +78,6 @@ export const usersReducer = (state = initialState, action: ActionsType) => {
         case SET_USERS: {
             return {...state, users: action.users}
         }
-
         case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
 
@@ -84,6 +85,9 @@ export const usersReducer = (state = initialState, action: ActionsType) => {
         case SET_TOTAL_USERS_COUNT: {
             return {...state, totalUsersCount: action.count}
 
+        }
+        case TOGGLE_IS_FETCHING: {
+            return {...state,isFetching: action.isFetching}
         }
 
         default:
@@ -103,4 +107,8 @@ export const setCurrentPageAC = (currenPage: number): SetCurrentPageType => ({
 export const setUsersTotalCountAC = (totalUsersCount: number): setUsersTotalCountType => ({
     type: SET_TOTAL_USERS_COUNT,
     count: totalUsersCount
+})
+export const toggleIsFetchingAC = (isFetching: boolean): setIsFetchingType => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching: isFetching
 })
