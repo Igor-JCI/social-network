@@ -2,11 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount, toggleIsFetching,
+    unfollow,
     UsersType
 } from "../../Redux/Users-reducer";
 import {RootStateType} from "../../Redux/Redux-store";
@@ -91,7 +91,17 @@ let mapStateToProps = (state: RootStateType): mstpType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): mdtpType => {
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setUsersTotalCount,
+    toggleIsFetching
+})(UsersContainer)
+
+
+/*let mapDispatchToProps = (dispatch: Dispatch): mdtpType => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
@@ -112,7 +122,14 @@ let mapDispatchToProps = (dispatch: Dispatch): mdtpType => {
             dispatch(toggleIsFetchingAC(isFetching))
         }
     }
-}
+}*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
-
+/*
+export default connect(mapStateToProps, {
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setUsersTotalCountAC,
+    toggleIsFetching: toggleIsFetchingAC
+})(UsersContainer)*/
