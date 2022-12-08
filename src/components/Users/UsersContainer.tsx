@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -26,7 +25,7 @@ class UsersContainer extends React.Component<CommonType> {
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsersTotalCount(response.data.totalCount)
             })
     }
 
@@ -76,7 +75,7 @@ type mdtpType = {
     unfollow: (userId: number) => void,
     setUsers: (users: Array<UsersType>) => void,
     setCurrentPage: (currentPage: number) => void,
-    setTotalUsersCount: (totalCount: number) => void,
+    setUsersTotalCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void
 }
 export type CommonType = mstpType & mdtpType
