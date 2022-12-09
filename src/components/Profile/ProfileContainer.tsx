@@ -9,9 +9,6 @@ import {CommonType} from "../Users/UsersContainer";
 import axios from "axios";
 
 type ProfileContainerPropsType = {
-    /* posts: Array<PostsArrayType>
-     newPostText: string
-     dispatch: (action: ActionsType) => void*/
 
 }
 
