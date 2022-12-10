@@ -123,12 +123,3 @@ export default connect(mapStateToProps, {
     }
 }*/
 
-/*
-export default connect(mapStateToProps, {
-    follow: followAC,
-    unfollow: unfollowAC,
-    setUsers: setUsersAC,
-    setCurrentPage: setCurrentPageAC,
-    setTotalUsersCount: setUsersTotalCountAC,
-    toggleIsFetching: toggleIsFetchingAC
-})(UsersContainer)*/
