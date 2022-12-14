@@ -2,6 +2,7 @@ import {StateType} from "../App";
 import profileReducer from "./Profile-reducer";
 import dialogsReducer from "./Dialogs-reducer";
 import {InitialStateType, UsersType} from "./Users-reducer";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 export type StoreType = {
     _state: StateType
@@ -15,15 +16,19 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-type AddPostActionType = {
+export type AddPostActionType = {
     type: "ADD-POST"
 }
 type AddMessageTextActionType = {
     type: "ADD-MESSAGE"
 }
-type UpdateNewPostTextActionType = {
+export type UpdateNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT",
     newText: string
+}
+export type SetUserProfileActionType = {
+    type: "SET_USER_PROFILE",
+    profile: ProfileType
 }
 type UpdateNewMessageTextActionType = {
     type: "UPDATE-NEW-MESSAGE-TEXT",
@@ -66,6 +71,7 @@ export type ActionsType =
     | SetCurrentPageType
     | setUsersTotalCountType
     | setIsFetchingType
+    | SetUserProfileActionType
 
 
 let store: StoreType = {

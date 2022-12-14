@@ -7,9 +7,34 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Profile from "./Profile";
 import {CommonType} from "../Users/UsersContainer";
 import axios from "axios";
+import {connect} from "react-redux";
+import {RootStateType} from "../../Redux/Redux-store";
+import {setUserProfile} from "../../Redux/Profile-reducer";
 
+export type ProfileType = {
+    aboutMe: string,
+    contacts:ContactsType,
+    lookingForAJob:boolean,
+    lookingForAJobDescription:string,
+    userId:number,
+    photos:PhotosType
+}
+export type ContactsType = {
+    facebook: string,
+    website: null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: null,
+    github: string,
+    "mainLink": null
+}
+export type PhotosType = {
+    small: string,
+    large: string,
+}
 type ProfileContainerPropsType = {
-
+    setUserProfile:(profile:ProfileType) => void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType>{
@@ -20,9 +45,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setUsersTotalCount(response.data.totalCount)
+                this.props.setUserProfile(response.data)
             })
     }
 
@@ -37,4 +60,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
 }
 
 
-export default ProfileContainer
+let mapStateToProps = (state: RootStateType) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps,{setUserProfile}) (ProfileContainer)

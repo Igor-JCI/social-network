@@ -1,9 +1,10 @@
 import React from "react";
-import {ActionsType} from "./Store";
-import {dialogsPageType, profilePageType, StateType} from "../App";
+import {ActionsType, AddPostActionType, SetUserProfileActionType, UpdateNewPostTextActionType} from "./Store";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
 type PostsArrayType = {
     id: string,
@@ -20,7 +21,8 @@ let initialState = {
         {id: "1", message: "Hi, how are you?", likesCount: 12},
         {id: "2", message: "It's my first post?", likesCount: 11},
     ],
-    newPostText: "It-kamasutra"
+    newPostText: "It-kamasutra",
+    profile:null
 }
 
 const profileReducer = (state = initialState, action: ActionsType) => {
@@ -53,6 +55,7 @@ const profileReducer = (state = initialState, action: ActionsType) => {
                 newPostText:action.newText
             }
         }
+        case SET_USER_PROFILE: {return {...state, profile: action.profile}}
 
         default:
             return state
@@ -74,17 +77,13 @@ const profileReducer = (state = initialState, action: ActionsType) => {
 
 }
 
-type AddPostActionType = {
-    type: "ADD-POST"
-}
-type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: string
-}
+
+
 
 export const addPostAC = (): AddPostActionType => ({type: ADD_POST})
-export const updateNewPostTextAC = (text: string): UpdateNewPostTextActionType =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const updateNewPostTextAC = (text: string): UpdateNewPostTextActionType => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile})
+
 
 
 
