@@ -14,18 +14,41 @@ type PostsArrayType = {
 type initialStateType = {
     posts: Array<PostsArrayType>
     newPostText: string
+    profile: ProfileType
 }
+// profile.contact &&
+// profile.contact.vk
 
 let initialState = {
     posts: [
         {id: "1", message: "Hi, how are you?", likesCount: 12},
         {id: "2", message: "It's my first post?", likesCount: 11},
     ],
-    newPostText: "It-kamasutra",
-    profile:null
+    newPostText: "",
+    profile:{
+        aboutMe: "",
+        contacts: {
+            facebook: "",
+            website: null,
+            vk: "",
+            twitter: "",
+            instagram: "",
+            youtube: null,
+            github: "",
+            mainLink: null
+        },
+        lookingForAJob: false,
+        lookingForAJobDescription: "",
+        fullName: "",
+        userId: 0,
+        photos: {
+            small: "",
+            large: ""
+        }
+    }
 }
 
-const profileReducer = (state = initialState, action: ActionsType) => {
+const profileReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
 
     switch (action.type) {
         case ADD_POST: {

@@ -4,18 +4,17 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsArrayType} from "../../App";
 import {ActionsType} from "../../Redux/Store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "./ProfileContainer";
 
 type ProfilePropsType = {
-   /* posts: Array<PostsArrayType>
-    newPostText: string
-    dispatch: (action: ActionsType) => void*/
+    profile: ProfileType
 
 }
 
 const Profile = (props: ProfilePropsType) => {
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile = {props.profile}/>
             <MyPostsContainer
                 /*dispatch={props.dispatch}
                 newPostText={props.newPostText}

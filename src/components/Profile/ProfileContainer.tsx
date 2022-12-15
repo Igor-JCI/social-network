@@ -13,11 +13,11 @@ import {setUserProfile} from "../../Redux/Profile-reducer";
 
 export type ProfileType = {
     aboutMe: string,
-    contacts:ContactsType,
-    lookingForAJob:boolean,
-    lookingForAJobDescription:string,
-    userId:number,
-    photos:PhotosType
+    contacts: ContactsType,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    userId: number,
+    photos: PhotosType
 }
 export type ContactsType = {
     facebook: string,
@@ -33,11 +33,9 @@ export type PhotosType = {
     small: string,
     large: string,
 }
-type ProfileContainerPropsType = {
-    setUserProfile:(profile:ProfileType) => void
-}
+type ProfileContainerPropsType = MSTP & MDTP
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType>{
+class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     constructor(props: ProfileContainerPropsType) {
         super(props);
     }
@@ -50,9 +48,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
     }
 
     render() {
+        const {profile} = this.props
         return (
             <div>
-                <Profile/>
+                <Profile profile = {profile}/>
             </div>
         )
     }
@@ -60,10 +59,18 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
 }
 
 
-let mapStateToProps = (state: RootStateType) => {
-    return {
+type MSTP = {
+    profile: ProfileType
+}
 
+let mapStateToProps = (state: RootStateType): MSTP => {
+    return {
+        profile: state.profilePage.profile
     }
 }
 
-export default connect(mapStateToProps,{setUserProfile}) (ProfileContainer)
+type MDTP = {
+    setUserProfile: (profile: ProfileType) => void
+}
+
+export default connect(mapStateToProps, {setUserProfile})(ProfileContainer)
