@@ -82,20 +82,6 @@ const profileReducer = (state: initialStateType = initialState, action: ActionsT
             return state
     }
 
-    /* if (action.type === ADD_POST) {
-         let NewPost = {
-             id: "3",
-             message: state.newPostText,
-             likesCount: 0
-         }
-         state.posts.push(NewPost)
-         state.newPostText = ""
-
-     } else if (action.type === UPDATE_NEW_POST_TEXT) {
-         state.newPostText = action.newText
-
-     }*/
-
 }
 
 
