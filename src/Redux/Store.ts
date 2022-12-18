@@ -3,6 +3,7 @@ import profileReducer from "./Profile-reducer";
 import dialogsReducer from "./Dialogs-reducer";
 import {InitialStateType, UsersType} from "./Users-reducer";
 import {ProfileType} from "../components/Profile/ProfileContainer";
+import {AuthReducerType} from "./Auth-reducer";
 
 export type StoreType = {
     _state: StateType
@@ -58,6 +59,10 @@ export type setIsFetchingType = {
     type: "TOGGLE_IS_FETCHING",
     isFetching: boolean
 }
+export type setUserDataType = {
+    type: "SET_USER_DATA",
+    data: AuthReducerType
+}
 
 
 export type ActionsType =
@@ -72,6 +77,7 @@ export type ActionsType =
     | setUsersTotalCountType
     | setIsFetchingType
     | SetUserProfileActionType
+    | setUserDataType
 
 
 let store: StoreType = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
+import HContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/NavBar/NavBar";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {Settings} from "./components/Settings/Settings";
@@ -43,13 +43,13 @@ const App = (props: AppPropsType) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() => <DialogsContainer
 
                     />}/>
-                    <Route path="/profile" render={() => <ProfileContainer
+                    <Route path="/profile/:userId?" render={() => <ProfileContainer
                        /* posts={props.state.profilePage.posts}
                         dispatch={props.dispatch}
                         newPostText={props.state.profilePage.newPostText}*/
