@@ -3,18 +3,19 @@ import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.png"
 import {UsersType} from "../../Redux/Users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
-    totalUsersCount:number,
-    pageSize:number,
-    currentPage:number,
-    onPageChanged:(pageNumber: number) => void,
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    onPageChanged: (pageNumber: number) => void,
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
     users: Array<UsersType>
 }
 
-const Users = (props:UsersPropsType) => {
+const Users = (props: UsersPropsType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = []
@@ -46,10 +47,31 @@ const Users = (props:UsersPropsType) => {
                         <div>
                             {u.followed
                                 ? <button onClick={() => {
-                                    props.unfollow(u.id)
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "8c42f357-e574-4a47-b1b5-8938589ef98b"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resulCode === 0) {
+                                                props.unfollow(u.id)
+                                            }
+                                        })
                                 }}>Unfollow</button>
+
                                 : <button onClick={() => {
-                                    props.follow(u.id)
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "8c42f357-e574-4a47-b1b5-8938589ef98b"
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resulCode === 0) {
+                                                props.follow(u.id)
+                                            }
+                                        })
                                 }}>Follow</button>}
                         </div>
                     </span>
