@@ -98,7 +98,10 @@ export const usersReducer = (state = initialState, action: ActionsType) => {
 }
 
 export const follow = (userId: number): FollowActionType => ({type: FOLLOW, userId: userId})
-export const unfollow = (userId: number): UnFollowActionType => ({type: UNFOLLOW, userId: userId})
+export const unfollow = (userId: number): UnFollowActionType => {
+    console.log("userId",userId)
+    return {type: UNFOLLOW, userId: userId}
+}
 export const setUsers = (users: Array<UsersType>): SetUsersActionType => ({type: SET_USERS, users: users})
 export const setCurrentPage = (currenPage: number): SetCurrentPageType => ({type: SET_CURRENT_PAGE, currentPage: currenPage})
 export const setUsersTotalCount = (totalUsersCount: number): setUsersTotalCountType => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount})

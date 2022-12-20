@@ -4,6 +4,7 @@ import userPhoto from "../../assets/images/user.png"
 import {UsersType} from "../../Redux/Users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {useDispatch} from "react-redux";
 
 type UsersPropsType = {
     totalUsersCount: number,
@@ -17,6 +18,8 @@ type UsersPropsType = {
 
 const Users = (props: UsersPropsType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+
+    const dispatch = useDispatch()
 
     let pages = []
     for (let i = 1; i <= pageCount; i++) {
@@ -54,7 +57,8 @@ const Users = (props: UsersPropsType) => {
                                         }
                                     })
                                         .then(response => {
-                                            if (response.data.resulCode === 0) {
+                                            if (response.data.resultCode === 0) {
+                                                console.log("unfolow")
                                                 props.unfollow(u.id)
                                             }
                                         })
@@ -68,7 +72,7 @@ const Users = (props: UsersPropsType) => {
                                         }
                                     })
                                         .then(response => {
-                                            if (response.data.resulCode === 0) {
+                                            if (response.data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
                                         })
