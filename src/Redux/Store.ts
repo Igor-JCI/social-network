@@ -63,7 +63,11 @@ export type setUserDataType = {
     type: "SET_USER_DATA",
     data: AuthReducerType
 }
-
+export type setFollowingInProgress = {
+    type: "TOGGLE_IS_FOLLOWING_PROGRESS",
+    isFetching: boolean,
+    userId: number
+}
 
 export type ActionsType =
     AddPostActionType
@@ -78,6 +82,7 @@ export type ActionsType =
     | setIsFetchingType
     | SetUserProfileActionType
     | setUserDataType
+    | setFollowingInProgress
 
 
 let store: StoreType = {
