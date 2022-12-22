@@ -1,10 +1,11 @@
+
 import React, {FC} from "react";
 import {CommonType} from "./UsersContainer";
 import styles from "./users.module.css";
 import axios from "axios";
 import userPhoto from "../../assets/images/user.png"
 
-const OldUsers: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
+/*const OldUsers: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
 
     let getUsers = () => {
         if (users.length === 0) {
@@ -22,12 +23,12 @@ const OldUsers: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
             {
                 users.map(u => <div key={u.id}>
                     <span>
-                        {/*{
+                        {/!*{
                             u.photos.small &&
                             <div>
                                 <img src={u.photos.small} className={styles.userPhoto}/>
                             </div>
-                        }*/}
+                        }*!/}
 
                         <div>
                                 <img src={u.photos.small != null ? u.photos.small : userPhoto}
@@ -60,4 +61,5 @@ const OldUsers: FC<CommonType> = ({users, setUsers, follow, unfollow}) => {
     )
 }
 
-export default OldUsers
+export default OldUsers*/
+

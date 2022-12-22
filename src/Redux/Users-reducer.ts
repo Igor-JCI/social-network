@@ -8,6 +8,8 @@ import {
     UnFollowActionType
 } from "./Store";
 import exp from "constants";
+import {Dispatch} from "redux";
+import {userAPI} from "../API/API";
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
@@ -117,8 +119,8 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
 
 }
 
-export const follow = (userId: number): FollowActionType => ({type: FOLLOW, userId: userId})
-export const unfollow = (userId: number): UnFollowActionType => {
+export const followSuccess = (userId: number): FollowActionType => ({type: FOLLOW, userId: userId})
+export const unfollowSuccess = (userId: number): UnFollowActionType => {
     console.log("userId", userId)
     return {type: UNFOLLOW, userId: userId}
 }
@@ -140,3 +142,40 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): se
     isFetching,
     userId
 })
+
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true))
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setUsersTotalCount(data.totalCount))
+        })
+    }
+}
+
+export const follow = (userId:number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        userAPI.follow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(followSuccess(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId))
+        })
+    }
+
+}
+
+export const unfollow = (userId:number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        userAPI.unfollow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollowSuccess(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId))
+        })
+    }
+
+}
