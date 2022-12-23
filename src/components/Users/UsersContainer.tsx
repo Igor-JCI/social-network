@@ -37,11 +37,6 @@ class UsersContainer extends React.Component<CommonType> {
     }
 
     render() {
-
-
-        // 4===5 ? 5 : 6
-        // || 0 || 15 = first truth value  user || 'Micke'
-        // && 15 && 20
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}

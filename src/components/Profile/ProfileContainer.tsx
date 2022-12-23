@@ -4,9 +4,10 @@ import {CommonType} from "../Users/UsersContainer";
 import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/Redux-store";
-import {setUserProfile} from "../../Redux/Profile-reducer";
+import {getUserProfile} from "../../Redux/Profile-reducer";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
+import {userAPI} from "../../API/API";
 
 export type ProfileType = {
     aboutMe: string,
@@ -42,10 +43,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         if (!userId) {
             userId = "2"
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })
+        this.props.getUserProfile(userId)
     }
 
     render() {
@@ -71,11 +69,11 @@ let mapStateToProps = (state: RootStateType): MSTP => {
 }
 
 type MDTP = {
-    setUserProfile: (profile: ProfileType) => void
+    getUserProfile:(userId:string) => void
 }
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
 
-const PContainer = connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
+const PContainer = connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
 export default PContainer

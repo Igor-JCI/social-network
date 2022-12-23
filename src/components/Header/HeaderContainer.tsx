@@ -2,15 +2,15 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/Redux-store";
-import {AuthReducerType, setUserData} from "../../Redux/Auth-reducer";
-import axios from "axios";
+import {getUserData} from "../../Redux/Auth-reducer";
+
 
 type MSTP = {
     isAuth: boolean,
-    login:string
+    login: string
 }
 type MDTP = {
-    setUserData:(data: AuthReducerType)=>void
+    getUserData: () => void
 }
 
 type CommonType = MSTP & MDTP
@@ -21,29 +21,20 @@ class HeaderContainer extends React.Component<CommonType> {
     }
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{
-            withCredentials: true
-        })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.setUserData(response.data.data)
-                }
-            })
+        this.props.getUserData()
     }
 
     render() {
-
         return <Header {...this.props}/>
     }
-
 }
 
 
 let mapStateToProps = (state: RootStateType): MSTP => {
     return {
         isAuth: state.auth.isAuth,
-        login:state.auth.login
+        login: state.auth.login
     }
 }
 
-export default connect(mapStateToProps,{setUserData})(HeaderContainer)
+export default connect(mapStateToProps, {getUserData})(HeaderContainer)

@@ -7,6 +7,8 @@ import {
     setUsersTotalCountType,
     UnFollowActionType
 } from "./Store";
+import {Dispatch} from "redux";
+import {authAPI} from "../API/API";
 
 
 const SET_USER_DATA = "SET_USER_DATA"
@@ -44,3 +46,13 @@ export const authReducer = (state = initialState, action: ActionsType): AuthRedu
 
 export const setUserData = (data: AuthReducerType): setUserDataType => ({type: SET_USER_DATA, data})
 
+
+export const getUserData = () => {
+  return (dispatch:Dispatch) => {
+      authAPI.me().then(response => {
+          if (response.data.resultCode === 0) {
+              dispatch(setUserData(response.data.data))
+          }
+      })
+    }
+}
