@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ContainerForUsersComponent from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import LoginPage from "./components/Login/Login";
 
 export type DialogsArrayType = {
     id: string
@@ -46,17 +47,10 @@ const App = (props: AppPropsType) => {
                 <HContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <DialogsContainer
-
-                    />}/>
-                    <Route path="/profile/:userId?" render={() => <ProfileContainer
-                       /* posts={props.state.profilePage.posts}
-                        dispatch={props.dispatch}
-                        newPostText={props.state.profilePage.newPostText}*/
-
-                    />}/>
-
+                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route path="/users" render={() => <ContainerForUsersComponent/>}/>
+                    <Route path="/login" render={() => <LoginPage/>}/>
 
                     <Route path="/News" render={() => <News/>}/>
                     <Route path="/Music" render={() => <Music/>}/>

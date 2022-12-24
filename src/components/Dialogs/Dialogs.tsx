@@ -3,6 +3,7 @@ import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsArrayType, MessagesArrayType} from "../../App";
+import {Redirect} from "react-router-dom";
 
 
 export type DialogsPropsType = {
@@ -10,7 +11,8 @@ export type DialogsPropsType = {
     messages: Array<MessagesArrayType>
     newMessageText: string
     addMessage: () => void
-    onChangeMessageText: (text: string) => void
+    onChangeMessageText: (text: string) => void,
+    isAuth:boolean
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -25,6 +27,9 @@ export const Dialogs = (props: DialogsPropsType) => {
         props.addMessage()
     }
 
+    if (props.isAuth === false) {
+        return <Redirect to={"/login"}/>
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
