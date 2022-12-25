@@ -5,11 +5,11 @@ import {dialogsPageType, StateType} from "../App";
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
-type dialogsArrayType = {
+export type dialogsArrayType = {
     id: string,
     name: string
 }
-type messagesArrayType = {
+export type messagesArrayType = {
     id: string,
     message: string
 }
@@ -39,11 +39,6 @@ let initialState = {
 }
 
 const dialogsReducer = (state = initialState, action: ActionsType) => {
-
-    /*let stateCopy = {...state}
-    stateCopy.messages = [...state.messages]*/
-
-
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT: {
             /*let stateCopy = {
@@ -73,11 +68,9 @@ const dialogsReducer = (state = initialState, action: ActionsType) => {
                 messages: [...state.messages, {id: "6", message: text}]
             }
         }
-
         default:
             return state
     }
-
     /*if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
         state.newMessageText = action.text
 

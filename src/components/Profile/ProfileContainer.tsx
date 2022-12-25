@@ -8,6 +8,7 @@ import {getUserProfile} from "../../Redux/Profile-reducer";
 import {Redirect, withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import {userAPI} from "../../API/API";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 export type ProfileType = {
     aboutMe: string,
@@ -47,9 +48,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 
     render() {
-        if (!this.props.isAuth) {
-            return <Redirect to={"/login"}/>
-        }
         const {profile} = this.props
         return (
             <div>
@@ -60,6 +58,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
 }
 
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 type MSTP = {
     profile: ProfileType,
@@ -77,7 +76,7 @@ type MDTP = {
     getUserProfile: (userId: string) => void
 }
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 
 
 const PContainer = connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
