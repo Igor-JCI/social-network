@@ -58,23 +58,30 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-
-type MSTP = {
-    profile: ProfileType,
+type MSTPRedirectType = {
     isAuth: boolean
 }
-
-let mapStateToProps = (state: RootStateType): MSTP => {
+type MSTP = {
+    profile: ProfileType,
+}
+let mapStateToPropsRedirect = (state: RootStateType): MSTPRedirectType => {
     return {
-        profile: state.profilePage.profile,
         isAuth: state.auth.isAuth
     }
 }
 
+let mapStateToProps = (state: RootStateType): MSTP => {
+    return {
+        profile: state.profilePage.profile
+    }
+}
 type MDTP = {
     getUserProfile: (userId: string) => void
 }
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
+AuthRedirectComponent = connect(mapStateToPropsRedirect, {})(AuthRedirectComponent)
 
 let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 

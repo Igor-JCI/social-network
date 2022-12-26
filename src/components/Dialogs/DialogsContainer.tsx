@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {RootStateType} from "../../Redux/Redux-store";
 import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 type CommonType = MSTP & MDTP
 
@@ -44,12 +45,8 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-let AuthRedirectComponent = (props: CommonType) => {
-    if (!props.isAuth) {
-        return <Redirect to={"/login"}/>
-    }
-    return <Dialogs {...props}/>
-}
+let AuthRedirectComponent = withAuthRedirect(Dialogs)
+
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
