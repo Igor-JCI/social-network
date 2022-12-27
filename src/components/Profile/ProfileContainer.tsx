@@ -1,13 +1,10 @@
 import React from "react";
 import Profile from "./Profile";
-import {CommonType} from "../Users/UsersContainer";
-import axios from "axios";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/Redux-store";
 import {getUserProfile} from "../../Redux/Profile-reducer";
-import {Redirect, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
-import {userAPI} from "../../API/API";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 export type ProfileType = {
