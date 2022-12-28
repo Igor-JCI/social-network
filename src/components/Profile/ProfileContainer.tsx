@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/Redux-store";
@@ -6,7 +6,7 @@ import {getUserProfile} from "../../Redux/Profile-reducer";
 import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
-import {text} from "stream/consumers";
+import {compose} from "redux";
 
 export type ProfileType = {
     aboutMe: string,
@@ -73,10 +73,14 @@ export type MDTP = {
     getUserProfile: (userId: string) => void
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+export default compose< ComponentType >(
+    connect(mapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 
+
+/*let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-
-
 const PContainer = connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
-export default PContainer
+export default PContainer*/

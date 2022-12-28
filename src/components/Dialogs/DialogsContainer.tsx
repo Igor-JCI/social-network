@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {
     addMessageTextAC,
     dialogsArrayType,
@@ -7,9 +7,8 @@ import {
 } from "../../Redux/Dialogs-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {RootStateType} from "../../Redux/Redux-store";
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 type CommonType = MSTP & MDTP
@@ -45,9 +44,15 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
+
+export default compose< ComponentType >(
+    connect<MSTP,MDTP,{},RootStateType>(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
+
+
+/*
 let AuthRedirectComponent = withAuthRedirect(Dialogs)
-
-
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
-export default DialogsContainer
+export default DialogsContainer*/

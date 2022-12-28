@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {
     getUsers,
@@ -9,6 +9,7 @@ import {RootStateType} from "../../Redux/Redux-store";
 import Users from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -88,10 +89,13 @@ let mapStateToProps = (state: RootStateType): mstpType => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
+export default compose <ComponentType> (
+    connect(mapStateToProps, {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow}),
+    withAuthRedirect
+)(UsersContainer)
 
-
-export default withAuthRedirect(connect(mapStateToProps,
-    {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow})(UsersContainer))
+/*export default withAuthRedirect(connect(mapStateToProps,
+    {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow})(UsersContainer))*/
 
 
 
