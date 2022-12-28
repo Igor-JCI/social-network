@@ -8,6 +8,7 @@ import {
 import {RootStateType} from "../../Redux/Redux-store";
 import Users from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 
 
@@ -88,8 +89,9 @@ let mapStateToProps = (state: RootStateType): mstpType => {
     }
 }
 
-export default connect(mapStateToProps,
-    {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow})(UsersContainer)
+
+export default withAuthRedirect(connect(mapStateToProps,
+    {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow})(UsersContainer))
 
 
 
