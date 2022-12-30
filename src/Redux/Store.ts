@@ -68,6 +68,10 @@ export type setFollowingInProgress = {
     isFetching: boolean,
     userId: number
 }
+export type setStatusType = {
+    type: "SET_STATUS",
+    status: string
+}
 
 export type ActionsType =
     AddPostActionType
@@ -83,6 +87,7 @@ export type ActionsType =
     | SetUserProfileActionType
     | setUserDataType
     | setFollowingInProgress
+    | setStatusType
 
 
 let store: StoreType = {

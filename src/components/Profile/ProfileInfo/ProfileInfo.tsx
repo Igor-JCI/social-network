@@ -5,8 +5,9 @@ import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus"
 
 type ProfileInfoType = {
-    profile: ProfileType
-
+    profile: ProfileType,
+    status: string,
+    updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props:ProfileInfoType) => {
@@ -23,7 +24,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
             </div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                <ProfileStatus status="Hello my friends"/>
+                <ProfileStatus status={props.status} updateStatus = {props.updateStatus}/>
             </div>
         </div>
     )
