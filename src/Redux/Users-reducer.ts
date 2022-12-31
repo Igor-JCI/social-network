@@ -47,9 +47,6 @@ export type UsersType = {
     photoUrl: string,
     location: LocationsType
 }
-type FollowingInProgressType = {
-    id: number
-}
 
 
 let initialState: InitialStateType = {
@@ -68,7 +65,6 @@ export const usersReducer = (state = initialState, action: ActionsType): Initial
         case FOLLOW: {
             return {
                 ...state,
-                //users: [...state.users]
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
