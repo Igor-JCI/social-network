@@ -7,7 +7,6 @@ import {
     setUsersTotalCountType,
     UnFollowActionType
 } from "./Store";
-import exp from "constants";
 import {Dispatch} from "redux";
 import {userAPI} from "../API/API";
 
