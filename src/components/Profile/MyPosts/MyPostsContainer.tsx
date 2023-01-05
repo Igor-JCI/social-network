@@ -1,7 +1,6 @@
 import React from "react";
 import {PostsArrayType, StateType} from "../../../App";
-import {addPostAC, updateNewPostTextAC} from "../../../Redux/Profile-reducer";
-import {ActionsType} from "../../../Redux/Store";
+import {addPostAC} from "../../../Redux/Profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -43,17 +42,13 @@ type MyPostsContainerPropsType = {
 let mapStateToProps = (state:RootStateType) => {
     return {
         posts:state.profilePage.posts,
-        newPostText:state.profilePage.newPostText
     }
 }
 
 let mapDispatchToProps = (dispatch:Dispatch) => {
     return {
-        updateNewPostText: (text:string) => {
-            dispatch(updateNewPostTextAC(text))
-        },
-        addPost:() => {
-            dispatch(addPostAC())
+        addPost:(newPostText:string) => {
+            dispatch(addPostAC(newPostText))
         }
     }
 }

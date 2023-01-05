@@ -1,9 +1,6 @@
-import React from "react";
 import {ActionsType} from "./Store";
-import {dialogsPageType, StateType} from "../App";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export type dialogsArrayType = {
     id: string,
@@ -16,7 +13,6 @@ export type messagesArrayType = {
 type initialStateType = {
     dialogs: Array<dialogsArrayType>
     messages: Array<messagesArrayType>
-    newMessageText: string
 }
 
 let initialState = {
@@ -35,36 +31,14 @@ let initialState = {
         {id: "4", message: "Yo"},
         {id: "5", message: "Yo"}
     ],
-    newMessageText: ""
 }
 
-const dialogsReducer = (state = initialState, action: ActionsType) => {
+const dialogsReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            /*let stateCopy = {
-                ...state,
-                newMessageText: action.text
-            }
-            return stateCopy*/
-            return {
-                ...state,
-                newMessageText: action.text
-            }
-        }
-
         case ADD_MESSAGE: {
-            /*let text = state.newMessageText
-            let stateCopy = {
-                ...state,
-                newMessageText: "",
-                messages: [...state.messages, {id: "6", message: text}]
-            }
-            return stateCopy*/
-
-            let text = state.newMessageText
+            let text = action.newMessageText
             return {
                 ...state,
-                newMessageText: "",
                 messages: [...state.messages, {id: "6", message: text}]
             }
         }
@@ -86,19 +60,11 @@ const dialogsReducer = (state = initialState, action: ActionsType) => {
     return state*/
 }
 
-
-type AddMessageTextActionType = {
-    type: "ADD-MESSAGE"
-}
-type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT",
-    text: string
+export type AddMessageTextActionType = {
+    type: "ADD-MESSAGE",
+    newMessageText:string
 }
 
-export const updateNewMessageTextAC = (text: string): UpdateNewMessageTextActionType => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    text: text
-})
-export const addMessageTextAC = (): AddMessageTextActionType => ({type: ADD_MESSAGE})
+export const addMessageTextAC = (newMessageText:string): AddMessageTextActionType => ({type: ADD_MESSAGE, newMessageText})
 
 export default dialogsReducer

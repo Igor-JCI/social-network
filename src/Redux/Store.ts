@@ -1,6 +1,6 @@
 import {StateType} from "../App";
 import profileReducer from "./Profile-reducer";
-import dialogsReducer from "./Dialogs-reducer";
+import dialogsReducer, {AddMessageTextActionType} from "./Dialogs-reducer";
 import {InitialStateType, UsersType} from "./Users-reducer";
 import {ProfileType} from "../components/Profile/ProfileContainer";
 import {AuthReducerType} from "./Auth-reducer";
@@ -18,22 +18,12 @@ export type StoreType = {
 }
 
 export type AddPostActionType = {
-    type: "ADD-POST"
-}
-type AddMessageTextActionType = {
-    type: "ADD-MESSAGE"
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: string
+    type: "ADD-POST",
+    newPostText:string
 }
 export type SetUserProfileActionType = {
     type: "SET_USER_PROFILE",
     profile: ProfileType
-}
-type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT",
-    text: string
 }
 export type FollowActionType = {
     type: "FOLLOW",
@@ -75,8 +65,6 @@ export type setStatusType = {
 
 export type ActionsType =
     AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageTextActionType
     | AddMessageTextActionType
     | FollowActionType
     | UnFollowActionType
@@ -132,7 +120,7 @@ let store: StoreType = {
     dispatch(action) {
 
         /*this._state.profilePage = profileReducer(this._state.profilePage, action)*/
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        /*this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)*/
         this._callSubscriber(this._state)
     }
 }

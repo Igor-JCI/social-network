@@ -3,9 +3,8 @@ import {
     addMessageTextAC,
     dialogsArrayType,
     messagesArrayType,
-    updateNewMessageTextAC
 } from "../../Redux/Dialogs-reducer";
-import {Dialogs} from "./Dialogs";
+import {Dialogs, NewMessageFormValuesType} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {RootStateType} from "../../Redux/Redux-store";
@@ -13,40 +12,37 @@ import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 type CommonType = MSTP & MDTP
 
-type MSTP = {
+export type MSTP = {
     dialogs: Array<dialogsArrayType>,
     messages: Array<messagesArrayType>,
-    newMessageText: string,
     isAuth: boolean
 }
-type MDTP = {
-    addMessage: () => void,
-    onChangeMessageText: (text: string) => void
+
+// type MSTP = ReturnType<typeof mapStateToProps>
+
+export type MDTP = {
+    addMessage: (newMessageText: string) => void
 }
 
-let mapStateToProps = (state: RootStateType) => {
+let mapStateToProps = (state: RootStateType): MSTP => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText,
         isAuth: state.auth.isAuth
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        addMessage: () => {
-            dispatch(addMessageTextAC())
+        addMessage: (newMessageText:string) => {
+            dispatch(addMessageTextAC(newMessageText))
         },
-        onChangeMessageText: (text: string) => {
-            dispatch(updateNewMessageTextAC(text))
-        }
     }
 }
 
 
 export default compose< ComponentType >(
-    connect<MSTP,MDTP,{},RootStateType>(mapStateToProps, mapDispatchToProps),
+    connect<MSTP, MDTP, {}, RootStateType>(mapStateToProps, mapDispatchToProps),
     withAuthRedirect
 )(Dialogs)
 
