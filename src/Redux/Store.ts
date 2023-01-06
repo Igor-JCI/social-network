@@ -51,7 +51,7 @@ export type setIsFetchingType = {
 }
 export type setUserDataType = {
     type: "SET_USER_DATA",
-    data: AuthReducerType
+    payload: AuthReducerType
 }
 export type setFollowingInProgress = {
     type: "TOGGLE_IS_FOLLOWING_PROGRESS",

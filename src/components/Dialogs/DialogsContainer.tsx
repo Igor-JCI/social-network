@@ -48,7 +48,7 @@ export default compose< ComponentType >(
 
 
 /*
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
+export default DialogsContainer
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-
-export default DialogsContainer*/
+let AuthRedirectComponent = withAuthRedirect(Dialogs)
+*/
