@@ -8,6 +8,12 @@
     color: red;
 }
 
+.formSummaryError {
+    border: solid red 2px;
+    padding: 5px;
+    color: red;
+}
+
 /*
 .formControl.error input,
 .formControl.error textarea {

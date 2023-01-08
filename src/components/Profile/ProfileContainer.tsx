@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "2"
+            userId = this.props.authorizedUserId
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -50,7 +50,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         const {profile} = this.props
         return (
             <div>
-                <Profile profile={profile} status = {this.props.status} updateStatus = {this.props.updateStatus}/>
+                <Profile profile={profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
             </div>
         )
     }
@@ -62,24 +62,28 @@ export type MSTPRedirectType = {
 }
 type MSTP = {
     profile: ProfileType,
-    status:string
+    status: string,
+    authorizedUserId: string,
+    isAuth: boolean
 }
 
 
 let mapStateToProps = (state: RootStateType): MSTP => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth: state.auth.isAuth
     }
 }
 export type MDTP = {
     getUserProfile: (userId: string) => void,
-    getStatus:(userId: string) => void,
-    updateStatus:(status: string) => void
+    getStatus: (userId: string) => void,
+    updateStatus: (status: string) => void
 }
 
-export default compose< ComponentType >(
-    connect(mapStateToProps, {getUserProfile,getStatus,updateStatus}),
+export default compose<ComponentType>(
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

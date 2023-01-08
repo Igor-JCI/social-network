@@ -1,11 +1,12 @@
-import React from "react";
-import {Field, reduxForm} from "redux-form";
+import React, {PropsWithChildren} from "react";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../Common/FormsControls/FormsControls";
 import {required} from "../../Utils/Validators/validators";
 import {connect} from "react-redux";
 import {login, logout} from "../../Redux/Auth-reducer";
 import {RootStateType} from "../../Redux/Redux-store";
 import {Redirect} from "react-router-dom";
+import style from "../../components/Common/FormsControls/FormsControls.module.css"
 
 type MSTP = {
     isAuth: boolean
@@ -33,7 +34,7 @@ const Login = (props: CommonType) => {
     )
 }
 
-const LoginForm = (props: any) => {
+const LoginForm = (props: PropsWithChildren<InjectedFormProps<{}, {}, string>>) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field placeholder={"Email"} name={"email"} component={Input} validate={[required]}/>
@@ -46,6 +47,8 @@ const LoginForm = (props: any) => {
             <Field component={Input} name={"rememberMe"} type={"checkbox"}/>
             Remember me
         </div>
+        {console.log(props)}
+        {props.error && <div className={style.formSummaryError}>{props.error}</div>}
         <div>
             <button>Login</button>
         </div>
