@@ -85,7 +85,6 @@ let mapStateToProps = (state: RootStateType): mstpType => {
 }
 export default compose <ComponentType> (
     connect(mapStateToProps, {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow}),
-    withAuthRedirect
 )(UsersContainer)
 
 /*export default withAuthRedirect(connect(mapStateToProps,

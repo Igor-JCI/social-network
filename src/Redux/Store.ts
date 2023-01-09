@@ -3,6 +3,7 @@ import {UsersType} from "./Users-reducer";
 import {ProfileType} from "../components/Profile/ProfileContainer";
 import {AuthReducerType} from "./Auth-reducer";
 import {FormAction} from "redux-form";
+import {setInitializedType} from "./App-reducer";
 
 /*export type StoreType = {
     _state: StateType
@@ -71,6 +72,7 @@ export type ActionsType =
     | setUserDataType
     | setFollowingInProgress
     | setStatusType
+|setInitializedType
 //
 export type ExtendedActionsType = ActionsType & FormAction
 
