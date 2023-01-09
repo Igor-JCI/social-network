@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import {
     follow,
     followSuccess,
-    setCurrentPage,
     requestUsers,
+    setCurrentPage,
     unfollow,
     unfollowSuccess,
     UsersType
@@ -18,9 +18,9 @@ import {
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
-    getTotalUsersCount
+    getTotalUsersCount,
+    getUsers
 } from "../../Redux/users-selectors";
-import {getUsers} from "../../Redux/users-selectors";
 
 type mstpType = {
     users: Array<UsersType>,
@@ -78,7 +78,6 @@ class UsersContainer extends React.Component<CommonType> {
         );
     }
 }
-
 /*let mapStateToProps = (state: RootStateType): mstpType => {
     return {
         users: state.usersPage.users,

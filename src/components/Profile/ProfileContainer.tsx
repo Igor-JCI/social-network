@@ -7,7 +7,6 @@ import {withRouter} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
-
 export type ProfileType = {
     aboutMe: string,
     contacts: ContactsType,
@@ -31,12 +30,25 @@ export type PhotosType = {
     large: string,
 }
 type ProfileContainerPropsType = MSTP & MDTP & RouteComponentProps<{ userId: string }>
+export type MSTPRedirectType = {
+    isAuth: boolean
+}
+type MSTP = {
+    profile: ProfileType,
+    status: string,
+    authorizedUserId: string,
+    isAuth: boolean
+}
+export type MDTP = {
+    getUserProfile: (userId: string) => void,
+    getStatus: (userId: string) => void,
+    updateStatus: (status: string) => void
+}
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     constructor(props: ProfileContainerPropsType) {
         super(props);
     }
-
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
@@ -57,19 +69,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
             </div>
         )
     }
-
 }
-
-export type MSTPRedirectType = {
-    isAuth: boolean
-}
-type MSTP = {
-    profile: ProfileType,
-    status: string,
-    authorizedUserId: string,
-    isAuth: boolean
-}
-
 
 let mapStateToProps = (state: RootStateType): MSTP => {
     return {
@@ -79,12 +79,6 @@ let mapStateToProps = (state: RootStateType): MSTP => {
         isAuth: state.auth.isAuth
     }
 }
-export type MDTP = {
-    getUserProfile: (userId: string) => void,
-    getStatus: (userId: string) => void,
-    updateStatus: (status: string) => void
-}
-
 export default compose<ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
