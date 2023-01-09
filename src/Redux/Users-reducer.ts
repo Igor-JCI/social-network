@@ -1,4 +1,3 @@
-
 import {
     ActionsType,
     FollowActionType,
@@ -17,7 +16,6 @@ const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
-
 type LocationsType = {
     city: string,
     country: string
@@ -26,7 +24,6 @@ export type PhotosType = {
     small: null | string,
     large: null | string
 }
-
 export type InitialStateType = {
     users: Array<UsersType>
     pageSize: number,
@@ -35,7 +32,6 @@ export type InitialStateType = {
     isFetching: boolean,
     followingInProgress: number[]
 }
-
 export type UsersType = {
     name: string,
     id: number,
@@ -46,8 +42,6 @@ export type UsersType = {
     photoUrl: string,
     location: LocationsType
 }
-
-
 let initialState: InitialStateType = {
     users: [] as UsersType[],
     pageSize: 5,
@@ -57,9 +51,7 @@ let initialState: InitialStateType = {
     followingInProgress: []
 }
 
-
 export const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
-
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -138,10 +130,11 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number): se
     userId
 })
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
-        userAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPage(page))
+        userAPI.getUsers(page, pageSize).then(data => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setUsersTotalCount(data.totalCount))

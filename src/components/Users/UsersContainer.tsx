@@ -1,17 +1,44 @@
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {
-    getUsers,
+    follow,
+    followSuccess,
     setCurrentPage,
-    UsersType, unfollowSuccess, followSuccess, follow, unfollow
+    requestUsers,
+    unfollow,
+    unfollowSuccess,
+    UsersType
 } from "../../Redux/Users-reducer";
 import {RootStateType} from "../../Redux/Redux-store";
 import Users from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount
+} from "../../Redux/users-selectors";
+import {getUsers} from "../../Redux/users-selectors";
 
-
+type mstpType = {
+    users: Array<UsersType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    isFetching: boolean,
+    followingInProgress:number[]
+}
+type mdtpType = {
+    followSuccess: (userId: number) => void,
+    unfollowSuccess: (userId: number) => void,
+    setCurrentPage: (currentPage: number) => void,
+    requestUsers: (currentPage: number, pageSize: number) => void,
+    follow:(userId:number) => void,
+    unfollow:(userId:number) => void
+}
+export type CommonType = mstpType & mdtpType
 
 class UsersContainer extends React.Component<CommonType> {
     constructor(props: CommonType) {
@@ -19,11 +46,10 @@ class UsersContainer extends React.Component<CommonType> {
     }
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }
-
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.requestUsers(pageNumber, this.props.pageSize)
        /* this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
         userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
@@ -31,7 +57,6 @@ class UsersContainer extends React.Component<CommonType> {
             this.props.setUsers(data.items)
         })*/
     }
-
     render() {
         return (
             <>
@@ -54,26 +79,7 @@ class UsersContainer extends React.Component<CommonType> {
     }
 }
 
-type mstpType = {
-    users: Array<UsersType>,
-    pageSize: number,
-    totalUsersCount: number,
-    currentPage: number,
-    isFetching: boolean,
-    followingInProgress:number[]
-}
-type mdtpType = {
-    followSuccess: (userId: number) => void,
-    unfollowSuccess: (userId: number) => void,
-    setCurrentPage: (currentPage: number) => void,
-    getUsers: (currentPage: number, pageSize: number) => void,
-    follow:(userId:number) => void,
-    unfollow:(userId:number) => void
-}
-
-export type CommonType = mstpType & mdtpType
-
-let mapStateToProps = (state: RootStateType): mstpType => {
+/*let mapStateToProps = (state: RootStateType): mstpType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -82,9 +88,21 @@ let mapStateToProps = (state: RootStateType): mstpType => {
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress
     }
+}*/
+
+let mapStateToProps = (state: RootStateType): mstpType => {
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
+    }
 }
+
 export default compose <ComponentType> (
-    connect(mapStateToProps, {followSuccess, unfollowSuccess, setCurrentPage, getUsers, follow, unfollow}),
+    connect(mapStateToProps, {followSuccess, unfollowSuccess, setCurrentPage, requestUsers, follow, unfollow}),
 )(UsersContainer)
 
 /*export default withAuthRedirect(connect(mapStateToProps,
