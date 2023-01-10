@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEventHandler, useState} from "react";
+import React, {ChangeEvent, MouseEventHandler, useEffect, useState} from "react";
 
 type ProfileStatusType = {
     status: string,
@@ -9,7 +9,10 @@ export const ProfileStatusWIthHooks = (props: ProfileStatusType) => {
     let [editMode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status)
 
-    /*MouseEventHandler<HTMLSpanElement>*/
+   useEffect(() =>{
+       setStatus(props.status)
+   }, [props.status])
+
     const activateEditMode = () => {
         debugger
         setEditMode(true)
