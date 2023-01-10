@@ -10,9 +10,10 @@ type MyPostsPropsType = {
     posts: Array<PostsArrayType>
     addPost: (newPostText: string) => void
 }
- const maxLength10 = maxLengthCreator(10)
+const maxLength10 = maxLengthCreator(10)
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
+    console.log("render")
     let onAddPost = (values: any) => {
         props.addPost(values.newPostText)
     }
@@ -27,7 +28,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 export type AddPostFormValuesType = {
     newPostText: string
@@ -36,7 +37,8 @@ export type AddPostFormValuesType = {
 const AddNewPostForm: React.FC<InjectedFormProps<AddPostFormValuesType>> = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field component={Textarea} name="newPostText" validate={[required, maxLength10]} placeholder = "Post message"/>
+            <Field component={Textarea} name="newPostText" validate={[required, maxLength10]}
+                   placeholder="Post message"/>
         </div>
         <div>
             <button>Add Post</button>
