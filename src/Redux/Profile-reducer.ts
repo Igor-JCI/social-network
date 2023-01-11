@@ -18,13 +18,11 @@ type PostsArrayType = {
     message: string,
     likesCount: number
 }
-type initialStateType = {
+export type initialStateType = {
     posts: Array<PostsArrayType>,
     profile: ProfileType,
     status: string
 }
-// profile.contact &&
-// profile.contact.vk
 
 let initialState = {
     posts: [
