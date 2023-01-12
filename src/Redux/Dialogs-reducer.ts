@@ -45,19 +45,6 @@ const dialogsReducer = (state: initialStateType = initialState, action: ActionsT
         default:
             return state
     }
-    /*if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-        state.newMessageText = action.text
-
-
-    } else if (action.type === ADD_MESSAGE) {
-        let NewMessage = {
-            id: "6",
-            message: state.newMessageText
-        }
-        state.messages.push(NewMessage)
-        state.newMessageText = ""
-    }
-    return state*/
 }
 
 export type AddMessageTextActionType = {
