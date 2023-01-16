@@ -28,15 +28,15 @@ type mstpType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress:number[]
+    followingInProgress: number[]
 }
 type mdtpType = {
     followSuccess: (userId: number) => void,
     unfollowSuccess: (userId: number) => void,
     setCurrentPage: (currentPage: number) => void,
     requestUsers: (currentPage: number, pageSize: number) => void,
-    follow:(userId:number) => void,
-    unfollow:(userId:number) => void
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void
 }
 export type CommonType = mstpType & mdtpType
 
@@ -46,17 +46,21 @@ class UsersContainer extends React.Component<CommonType> {
     }
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize)
     }
+
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
-       /* this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-        })*/
+        const {pageSize} = this.props
+        this.props.requestUsers(pageNumber, pageSize)
+        /* this.props.setCurrentPage(pageNumber)
+         this.props.toggleIsFetching(true)
+         userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+             this.props.toggleIsFetching(false)
+             this.props.setUsers(data.items)
+         })*/
     }
+
     render() {
         return (
             <>
@@ -69,15 +73,16 @@ class UsersContainer extends React.Component<CommonType> {
                     followSuccess={this.props.followSuccess}
                     unfollowSuccess={this.props.unfollowSuccess}
                     users={this.props.users}
-                    followingInProgress = {this.props.followingInProgress}
-                    follow = {this.props.follow}
-                    unfollow = {this.props.unfollow}
+                    followingInProgress={this.props.followingInProgress}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
                 />
             </>
 
         );
     }
 }
+
 /*let mapStateToProps = (state: RootStateType): mstpType => {
     return {
         users: state.usersPage.users,
@@ -100,7 +105,7 @@ let mapStateToProps = (state: RootStateType): mstpType => {
     }
 }
 
-export default compose <ComponentType> (
+export default compose<ComponentType>(
     connect(mapStateToProps, {followSuccess, unfollowSuccess, setCurrentPage, requestUsers, follow, unfollow}),
 )(UsersContainer)
 

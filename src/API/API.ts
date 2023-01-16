@@ -17,7 +17,7 @@ export const userAPI = {
         })
     },
     follow(userId: number) {
-        return instance.post(`follow/${userId}`)
+        return instance.post<CommonResponse<{}>>(`follow/${userId}`)
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
@@ -38,7 +38,7 @@ export const profileAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return instance.get<CommonResponse<MeResponseData>>(`auth/me`)
     },
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post(`auth/login`, {email, password, rememberMe})
@@ -46,4 +46,23 @@ export const authAPI = {
     logout() {
         return instance.delete(`auth/login`)
     }
+}
+//id: 26751, login: "Igor_JCI", email: "7.jciab.7@gmail.com"
+
+type MeResponseData = {
+    id: string,
+    login: string,
+    email: string
+}
+
+export enum StatusCodes {
+    success,
+    failed
+}
+
+export type CommonResponse<T> = {
+    data: T
+    fieldErrors: string[]
+    messages: string[]
+    resultCode: StatusCodes
 }
