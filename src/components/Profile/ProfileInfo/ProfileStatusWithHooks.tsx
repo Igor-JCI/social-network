@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEventHandler, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 
 type ProfileStatusType = {
     status: string,
@@ -14,18 +14,15 @@ export const ProfileStatusWIthHooks = (props: ProfileStatusType) => {
    }, [props.status])
 
     const activateEditMode = () => {
-        debugger
         setEditMode(true)
     }
 
     const deactivateEditMode = () => {
-        debugger
         setEditMode(false)
         props.updateStatus(status)
     }
 
     const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        debugger
         setStatus(e.currentTarget.value)
     }
 

@@ -78,7 +78,6 @@ class UsersContainer extends React.Component<CommonType> {
                     unfollow={this.props.unfollow}
                 />
             </>
-
         );
     }
 }
