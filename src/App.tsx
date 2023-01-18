@@ -10,8 +10,8 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ContainerForUsersComponent from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import LoginPage from "./components/Login/Login";
-import {connect} from "react-redux";
-import {RootStateType} from "./Redux/Redux-store";
+import {connect, Provider} from "react-redux";
+import store, {RootStateType} from "./Redux/Redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./Redux/App-reducer";
 import {Preloader} from "./components/Common/Preloader/Preloader";
@@ -51,11 +51,9 @@ type MSTP = {
 type CommonType = MDTP & MSTP
 
 class App extends React.Component<CommonType> {
-
     componentDidMount() {
         this.props.initializeApp()
     }
-
     render() {
         if (!this.props.initialized) {
             <Preloader/>
@@ -93,6 +91,15 @@ export const AppContainer = compose<ComponentType>(
     connect(mapStateToProps, {initializeApp})
 )(App)
 
+const MainApp = () => {
+   return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer
+            />
+        </Provider>
+    </BrowserRouter>
+}
+export default MainApp
 /*let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 const PContainer = connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
