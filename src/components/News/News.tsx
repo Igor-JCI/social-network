@@ -1,10 +1,11 @@
 import React from "react";
 
 
-export const News = () => {
+ const News = () => {
     return (
         <div>
             News
         </div>
     )
 }
+export default News

@@ -22,7 +22,7 @@ const reducers = combineReducers({
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, ActionsType | FormAction>
 export type RootStateType = ReturnType<typeof reducers>
 
-
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers,composeEnhancers(applyMiddleware(thunkMiddleware)))
 

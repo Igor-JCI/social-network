@@ -3,18 +3,26 @@ import './App.css';
 import HContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/NavBar/NavBar";
 import {BrowserRouter, Route, withRouter} from 'react-router-dom';
-import {Settings} from "./components/Settings/Settings";
-import {Music} from "./components/Music/Music";
-import {News} from "./components/News/News";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ContainerForUsersComponent from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import LoginPage from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
 import store, {RootStateType} from "./Redux/Redux-store";
 import {compose} from "redux";
 import {initializeApp} from "./Redux/App-reducer";
 import {Preloader} from "./components/Common/Preloader/Preloader";
+
+//import DialogsContainer from "./components/Dialogs/DialogsContainer"
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
+//import ProfileContainer from "./components/Profile/ProfileContainer";
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
+//import {Settings} from "./components/Settings/Settings";
+const Settings = React.lazy(() => import("./components/Settings/Settings"));
+//import {Music} from "./components/Music/Music";
+const Music = React.lazy(() => import("./components/Music/Music"));
+//import {News} from "./components/News/News";
+const News = React.lazy(() => import("./components/News/News"));
+//import ContainerForUsersComponent from "./components/Users/UsersContainer";
+const ContainerForUsersComponent = React.lazy(() => import("./components/Users/UsersContainer"));
+//import LoginPage from "./components/Login/Login";
+const LoginPage = React.lazy(() => import("./components/Login/Login"));
 
 export type DialogsArrayType = {
     id: string
@@ -54,6 +62,7 @@ class App extends React.Component<CommonType> {
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
         if (!this.props.initialized) {
             <Preloader/>
@@ -64,15 +73,29 @@ class App extends React.Component<CommonType> {
                     <HContainer/>
                     <Navbar/>
                     <div className="app-wrapper-content">
-
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
-                        <Route path="/users" render={() => <ContainerForUsersComponent/>}/>
-                        <Route path="/login" render={() => <LoginPage/>}/>
-
-                        <Route path="/News" render={() => <News/>}/>
-                        <Route path="/Music" render={() => <Music/>}/>
-                        <Route path="/Settings" render={() => <Settings/>}/>
+                        <Route path="/dialogs" render={() => {
+                            return <React.Suspense fallback={<Preloader/>}>
+                                <DialogsContainer/>
+                            </React.Suspense>
+                        }}/>
+                        <Route path="/profile/:userId?"
+                               render={() => <React.Suspense fallback={<Preloader/>}> <ProfileContainer/>
+                               </React.Suspense>}/>
+                        <Route path="/login" render={() => <React.Suspense fallback={<Preloader/>}>
+                            <LoginPage/>
+                        </React.Suspense>}/>
+                        <Route path="/users" render={() => <React.Suspense fallback={<Preloader/>}>
+                            <ContainerForUsersComponent/>
+                        </React.Suspense>}/>
+                        <Route path="/News" render={() => <React.Suspense fallback={<Preloader/>}>
+                            <News/>
+                        </React.Suspense>}/>
+                        <Route path="/Music" render={() => <React.Suspense fallback={<Preloader/>}>
+                            <Music/>
+                        </React.Suspense>}/>
+                        <Route path="/Settings" render={() => <React.Suspense fallback={<Preloader/>}>
+                            <Settings/>
+                        </React.Suspense>}/>
                     </div>
                 </div>
             </BrowserRouter>
@@ -92,7 +115,7 @@ export const AppContainer = compose<ComponentType>(
 )(App)
 
 const MainApp = () => {
-   return <BrowserRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer
             />
