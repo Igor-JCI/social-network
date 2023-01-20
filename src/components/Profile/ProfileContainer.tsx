@@ -83,9 +83,3 @@ export default compose<ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
 )(ProfileContainer)
-
-
-/*let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
-const PContainer = connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
-export default PContainer*/
