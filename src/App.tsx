@@ -2,7 +2,7 @@ import React, {ComponentType} from 'react';
 import './App.css';
 import HContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/NavBar/NavBar";
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, withRouter} from 'react-router-dom';
 import {connect, Provider} from "react-redux";
 import store, {RootStateType} from "./Redux/Redux-store";
 import {compose} from "redux";
@@ -115,12 +115,12 @@ export const AppContainer = compose<ComponentType>(
 )(App)
 
 const MainApp = () => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer
             />
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default MainApp
 /*let AuthRedirectComponent = withAuthRedirect(ProfileContainer)

@@ -4,6 +4,8 @@ import {ProfileType} from "../components/Profile/ProfileContainer";
 import {AuthReducerType} from "./Auth-reducer";
 import {FormAction} from "redux-form";
 import {setInitializedType} from "./App-reducer";
+import any = jasmine.any;
+import {PhotosType} from "./Profile-reducer";
 
 /*export type StoreType = {
     _state: StateType
@@ -15,7 +17,7 @@ import {setInitializedType} from "./App-reducer";
 
 export type AddPostActionType = {
     type: "ADD-POST",
-    newPostText:string,
+    newPostText: string,
 }
 export type SetUserProfileActionType = {
     type: "SET_USER_PROFILE",
@@ -58,6 +60,10 @@ export type setStatusType = {
     type: "SET_STATUS",
     status: string
 }
+export type savePhotoSuccessType = {
+    type: "SAVE_PHOTO_SUCCESS",
+    photos: PhotosType
+}
 
 export type ActionsType =
     AddPostActionType
@@ -72,7 +78,8 @@ export type ActionsType =
     | setUserDataType
     | setFollowingInProgress
     | setStatusType
-|setInitializedType
+    | setInitializedType
+    | savePhotoSuccessType
 //
 export type ExtendedActionsType = ActionsType & FormAction
 

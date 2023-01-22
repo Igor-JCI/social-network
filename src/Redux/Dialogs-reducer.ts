@@ -14,6 +14,10 @@ type initialStateType = {
     dialogs: Array<dialogsArrayType>
     messages: Array<messagesArrayType>
 }
+export type AddMessageTextActionType = {
+    type: "ADD-MESSAGE",
+    newMessageText:string
+}
 
 let initialState = {
     dialogs: [
@@ -45,11 +49,6 @@ const dialogsReducer = (state: initialStateType = initialState, action: ActionsT
         default:
             return state
     }
-}
-
-export type AddMessageTextActionType = {
-    type: "ADD-MESSAGE",
-    newMessageText:string
 }
 
 export const addMessageTextAC = (newMessageText:string): AddMessageTextActionType => ({type: ADD_MESSAGE, newMessageText})

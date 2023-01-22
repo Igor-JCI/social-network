@@ -1,17 +1,14 @@
-import React from "react";
-import {
-    ActionsType,
-    AddPostActionType,
-    setStatusType,
-    SetUserProfileActionType,
-} from "./Store";
+import {ActionsType, AddPostActionType, savePhotoSuccessType, setStatusType, SetUserProfileActionType,} from "./Store";
 import {ProfileType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
-import {profileAPI, userAPI} from "../API/API";
+import {profileAPI} from "../API/API";
+import {RootStateType} from "./Redux-store";
+import {ThunkDispatch} from "redux-thunk";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
 
 type PostsArrayType = {
     id: string,
@@ -22,6 +19,16 @@ export type initialStateType = {
     posts: Array<PostsArrayType>,
     profile: ProfileType,
     status: string
+}
+export type PhotosType = {
+    small: string,
+    large: string
+}
+export type Profile = {
+    aboutMe: string,
+    fullName: string,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string
 }
 
 let initialState = {
@@ -54,7 +61,6 @@ let initialState = {
 }
 
 const profileReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
-
     switch (action.type) {
         case ADD_POST: {
             let text = action.newPostText
@@ -69,17 +75,19 @@ const profileReducer = (state: initialStateType = initialState, action: ActionsT
         case SET_STATUS: {
             return {...state, status: action.status}
         }
-
+        case SAVE_PHOTO_SUCCESS: {
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
         default:
             return state
     }
 
 }
 
-export const addPostAC = (newPostText:string): AddPostActionType => ({type: ADD_POST, newPostText})
+export const addPostAC = (newPostText: string): AddPostActionType => ({type: ADD_POST, newPostText})
 export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status: string): setStatusType => ({type: SET_STATUS, status})
-
+export const savePhotoSuccess = (photos: PhotosType): savePhotoSuccessType => ({type: SAVE_PHOTO_SUCCESS, photos})
 
 export const getUserProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
@@ -89,7 +97,6 @@ export const getUserProfile = (userId: string) => {
             })
     }
 }
-
 export const getStatus = (userId: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.getStatus(userId)
@@ -98,7 +105,6 @@ export const getStatus = (userId: string) => {
             })
     }
 }
-
 export const updateStatus = (status: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.updateStatus(status)
@@ -107,6 +113,26 @@ export const updateStatus = (status: string) => {
                     dispatch(setStatus(status))
                 }
             })
+    }
+}
+export const savePhoto = (file: File) => {
+    return async (dispatch: Dispatch) => {
+        let response = await profileAPI.savePhoto(file)
+
+        if (response.data.resultCode === 0) {
+            dispatch(savePhotoSuccess(response.data.data.photos))
+        }
+
+    }
+}
+export const saveProfile = (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) => {
+    return async (dispatch: ThunkDispatch<RootStateType, {}, ActionsType>, getState: () => RootStateType) => {
+        const userId = getState().auth.id
+        const response = await profileAPI.saveProfile(aboutMe, fullName, lookingForAJob, lookingForAJobDescription)
+        debugger
+        if (response.data.resultCode === 0) {
+            dispatch(getUserProfile(userId))
+        }
     }
 }
 

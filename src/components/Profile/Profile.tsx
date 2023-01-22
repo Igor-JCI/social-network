@@ -7,13 +7,17 @@ import {ProfileType} from "./ProfileContainer";
 type ProfilePropsType = {
     profile: ProfileType,
     status: string,
-    updateStatus: (status: string) => void
+    updateStatus: (status: string) => void,
+    isOwner: boolean,
+    savePhoto: (file: File) => void,
+    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile} status = {props.status} updateStatus ={props.updateStatus}/>
+            <ProfileInfo saveProfile={props.saveProfile} isOwner={props.isOwner} profile={props.profile}
+                         status={props.status} updateStatus={props.updateStatus} savePhoto={props.savePhoto}/>
             <MyPostsContainer/>
         </div>
     )

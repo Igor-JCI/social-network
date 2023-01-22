@@ -13,7 +13,6 @@ type MyPostsPropsType = {
 const maxLength10 = maxLengthCreator(10)
 
 const MyPosts = React.memo((props: MyPostsPropsType) => {
-    console.log("render")
     let onAddPost = (values: any) => {
         props.addPost(values.newPostText)
     }

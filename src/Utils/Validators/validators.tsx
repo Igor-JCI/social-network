@@ -6,7 +6,6 @@ export const required = (value:any) => {
         return undefined
     }
     return "Field is required"
-
 }
 
 export const maxLengthCreator = (maxLength:any) => (value:any) =>{
@@ -14,7 +13,6 @@ export const maxLengthCreator = (maxLength:any) => (value:any) =>{
         return `Max length is ${maxLength} symbols`
     }
     return undefined
-
 }
 
 /*export const maxLength30 = (value:any) => {

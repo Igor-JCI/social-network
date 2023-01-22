@@ -47,7 +47,6 @@ const LoginForm = (props: PropsWithChildren<InjectedFormProps<{}, {}, string>>) 
             <Field component={Input} name={"rememberMe"} type={"checkbox"}/>
             Remember me
         </div>
-        {console.log(props)}
         {props.error && <div className={style.formSummaryError}>{props.error}</div>}
         <div>
             <button>Login</button>
