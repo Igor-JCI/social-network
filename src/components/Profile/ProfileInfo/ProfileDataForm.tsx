@@ -1,12 +1,10 @@
 import React from "react";
 import {Input, Textarea} from "../../Common/FormsControls/FormsControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {ProfileType} from "../ProfileContainer";
 
 type ProfileDataFormType = {
-    aboutMe: string
-    fullName: string
-    lookingForAJob:boolean
-    lookingForAJobDescription:string
+    //profile: ProfileType
 }
 
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = (props) => {

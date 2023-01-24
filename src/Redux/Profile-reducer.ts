@@ -129,7 +129,6 @@ export const saveProfile = (aboutMe: string, fullName: string, lookingForAJob: b
     return async (dispatch: ThunkDispatch<RootStateType, {}, ActionsType>, getState: () => RootStateType) => {
         const userId = getState().auth.id
         const response = await profileAPI.saveProfile(aboutMe, fullName, lookingForAJob, lookingForAJobDescription)
-        debugger
         if (response.data.resultCode === 0) {
             dispatch(getUserProfile(userId))
         }

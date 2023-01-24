@@ -38,6 +38,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     }
     const onSubmit = (formData: any) => {
         props.saveProfile(formData.aboutMe, formData.fullName, formData.lookingForAJob, formData.lookingForAJobDescription)
+        setEditMode(false)
     }
     return (
         <div>
