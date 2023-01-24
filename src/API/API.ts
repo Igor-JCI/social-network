@@ -1,5 +1,20 @@
 import axios from "axios";
-import {Profile} from "../Redux/Profile-reducer";
+import {ContactsType} from "../components/Profile/ProfileContainer";
+type MeResponseData = {
+    id: string,
+    login: string,
+    email: string
+}
+export enum StatusCodes {
+    success,
+    failed
+}
+export type CommonResponse<T> = {
+    data: T
+    fieldErrors: string[]
+    messages: string[]
+    resultCode: StatusCodes
+}
 
 const instance = axios.create(
     {
@@ -24,7 +39,6 @@ export const userAPI = {
         return instance.delete(`follow/${userId}`)
     }
 }
-
 export const profileAPI = {
     getProfile(userId: string) {
         return instance.get(`profile/` + userId)
@@ -44,11 +58,10 @@ export const profileAPI = {
             }
         })
     },
-    saveProfile (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) {
-        return instance.put("profile", {aboutMe,fullName,lookingForAJob, lookingForAJobDescription })
+    saveProfile (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string, contacts:ContactsType) {
+        return instance.put("profile", {aboutMe,fullName,lookingForAJob, lookingForAJobDescription,contacts })
     }
 }
-
 export const authAPI = {
     me() {
         return instance.get<CommonResponse<MeResponseData>>(`auth/me`)
@@ -60,22 +73,5 @@ export const authAPI = {
         return instance.delete(`auth/login`)
     }
 }
-//id: 26751, login: "Igor_JCI", email: "7.jciab.7@gmail.com"
 
-type MeResponseData = {
-    id: string,
-    login: string,
-    email: string
-}
 
-export enum StatusCodes {
-    success,
-    failed
-}
-
-export type CommonResponse<T> = {
-    data: T
-    fieldErrors: string[]
-    messages: string[]
-    resultCode: StatusCodes
-}

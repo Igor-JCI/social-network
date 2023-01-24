@@ -1,7 +1,7 @@
 import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {ProfileType} from "./ProfileContainer";
+import {ContactsType, ProfileType} from "./ProfileContainer";
 
 
 type ProfilePropsType = {
@@ -10,7 +10,7 @@ type ProfilePropsType = {
     updateStatus: (status: string) => void,
     isOwner: boolean,
     savePhoto: (file: File) => void,
-    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) => void
+    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string, contacts:ContactsType) =>Promise<void>
 }
 
 const Profile = (props: ProfilePropsType) => {

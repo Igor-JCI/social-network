@@ -1,9 +1,10 @@
 import {ActionsType, AddPostActionType, savePhotoSuccessType, setStatusType, SetUserProfileActionType,} from "./Store";
-import {ProfileType} from "../components/Profile/ProfileContainer";
+import {ContactsType, ProfileType} from "../components/Profile/ProfileContainer";
 import {Dispatch} from "redux";
 import {profileAPI} from "../API/API";
 import {RootStateType} from "./Redux-store";
 import {ThunkDispatch} from "redux-thunk";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE"
@@ -118,19 +119,22 @@ export const updateStatus = (status: string) => {
 export const savePhoto = (file: File) => {
     return async (dispatch: Dispatch) => {
         let response = await profileAPI.savePhoto(file)
-
         if (response.data.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.data.photos))
         }
 
     }
 }
-export const saveProfile = (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) => {
+
+export const saveProfile = (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string, contacts: ContactsType) => {
     return async (dispatch: ThunkDispatch<RootStateType, {}, ActionsType>, getState: () => RootStateType) => {
         const userId = getState().auth.id
-        const response = await profileAPI.saveProfile(aboutMe, fullName, lookingForAJob, lookingForAJobDescription)
+        const response = await profileAPI.saveProfile(aboutMe, fullName, lookingForAJob, lookingForAJobDescription, contacts)
         if (response.data.resultCode === 0) {
             dispatch(getUserProfile(userId))
+        } else {
+            dispatch(stopSubmit("edit-profile",  {_error: response.data.messages[0]}))
+            return Promise.reject(response.data.messages[0])
         }
     }
 }

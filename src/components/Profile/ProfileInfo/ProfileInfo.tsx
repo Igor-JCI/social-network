@@ -12,7 +12,7 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void,
     isOwner: boolean,
     savePhoto: (file: File) => void,
-    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) => void
+    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string, contacts: ContactsType) => Promise<void>
 }
 type ContactType = {
     contactTitle: any,
@@ -24,8 +24,7 @@ type ProfileDataType = {
     goToEditMode: () => void
 }
 
-
-export const ProfileInfo = (props: ProfileInfoType) => {
+export const ProfileInfo: React.FC<ProfileInfoType> = ({saveProfile, ...props}) => {
     let [editMode, setEditMode] = useState(false)
 
     if (!props.profile) {
@@ -37,8 +36,10 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         }
     }
     const onSubmit = (formData: any) => {
-        props.saveProfile(formData.aboutMe, formData.fullName, formData.lookingForAJob, formData.lookingForAJobDescription)
-        setEditMode(false)
+        saveProfile(formData.aboutMe, formData.fullName, formData.lookingForAJob, formData.lookingForAJobDescription, formData.contacts)
+            .then(() => {
+                setEditMode(false)
+            })
     }
     return (
         <div>
@@ -46,7 +47,8 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 <img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
                 {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
 
-                {editMode ? <ProfileDataFormRedux initialValues={props.profile} onSubmit={onSubmit}/> :
+                {editMode ?
+                    <ProfileDataFormRedux profile={props.profile} initialValues={props.profile} onSubmit={onSubmit}/> :
                     <ProfileData goToEditMode={() => setEditMode(true)} profile={props.profile}
                                  isOwner={props.isOwner}/>}
 
@@ -88,7 +90,7 @@ const ProfileData = (props: ProfileDataType) => {
     </div>
 }
 
-const Contact = (props: ContactType) => {
+export const Contact = (props: ContactType) => {
     return <div className={s.contact}><b>{props.contactTitle}</b>: {props.contactValue ? props.contactValue : 'none'}
     </div>
 }

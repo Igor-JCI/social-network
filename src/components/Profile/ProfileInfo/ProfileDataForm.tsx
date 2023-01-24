@@ -1,18 +1,23 @@
-import React from "react";
+import React, {PropsWithChildren} from "react";
 import {Input, Textarea} from "../../Common/FormsControls/FormsControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {ProfileType} from "../ProfileContainer";
+import s from "./ProfileInfo.module.css"
+import style from "../../Common/FormsControls/FormsControls.module.css";
+import {Simulate} from "react-dom/test-utils";
+
 
 type ProfileDataFormType = {
-    //profile: ProfileType
+    profile: ProfileType
 }
-
-const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = (props) => {
-    return <form onSubmit={props.handleSubmit}>
+//React.FC<InjectedFormProps<{}, ProfileDataFormType> & ProfileDataFormType>
+const ProfileDataForm: React.FC<InjectedFormProps<any, ProfileDataFormType> & ProfileDataFormType> = ({ handleSubmit, profile, error, ...props }) => {
+    console.log(error)
+    return <form onSubmit={handleSubmit}>
         <div>
             <button>Save</button>
         </div>
-
+        {error && <div className={style.formSummaryError}>{error}</div>}
         <div>
             <b>Full Name</b>: <Field component={Input} validate={[]} name="fullName" placeholder="Full name"/>
         </div>
@@ -29,16 +34,17 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = (props
         <div>
             <b>About me</b>: <Field component={Textarea} validate={[]} name="aboutMe" placeholder="About me"/>
         </div>
-        {/*<div>
-            <b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
-            return <Contact key={key}
-                            contactTitle={key}
-                            contactValue={props.profile.contacts[key as keyof ContactsType]}/>
+        <div>
+            <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+            return <div key={key} className={s.contact}>
+                <b>{key}</b>: <Field component={Input} validate={[]} name={"contacts." + key} placeholder={key}/>
+            </div>
         })}
-        </div>*/}
+        </div>
     </form>
 }
 
-const ProfileDataFormRedux = reduxForm<ProfileDataFormType>({form: "edit-profile"})(ProfileDataForm)
+const ProfileDataFormReduxForm = reduxForm<any,any>({ form: "edit-profile" })(ProfileDataForm)
+/*const ProfileDataFormRedux = reduxForm<{}, ProfileDataFormType>({form: "edit-profile"})(ProfileDataForm)*/
 
-export default ProfileDataFormRedux
+export default ProfileDataFormReduxForm

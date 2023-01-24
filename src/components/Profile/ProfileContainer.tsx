@@ -45,7 +45,7 @@ export type MDTP = {
     getStatus: (userId: string) => void,
     updateStatus: (status: string) => void,
     savePhoto: (file: File) => void,
-    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string) => void
+    saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string, contacts:ContactsType) => Promise<void>
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
