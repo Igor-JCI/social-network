@@ -64,6 +64,10 @@ export type savePhotoSuccessType = {
     type: "SAVE_PHOTO_SUCCESS",
     photos: PhotosType
 }
+export type getCaptchaUrlSuccessType = {
+    type: "GET_CAPTCHA_URL_SUCCESS",
+    payload: string
+}
 
 export type ActionsType =
     AddPostActionType
@@ -80,6 +84,7 @@ export type ActionsType =
     | setStatusType
     | setInitializedType
     | savePhotoSuccessType
+    | getCaptchaUrlSuccessType
 //
 export type ExtendedActionsType = ActionsType & FormAction
 

@@ -9,17 +9,18 @@ import {Redirect} from "react-router-dom";
 import style from "../../components/Common/FormsControls/FormsControls.module.css"
 
 type MSTP = {
-    isAuth: boolean
+    isAuth: boolean,
+    captchaUrl: null | string | undefined
 }
 type MDTP = {
-    login: (email: string, password: string, rememberMe: boolean) => void,
+    login: (email: string, password: string, rememberMe: boolean, captcha:string) => void,
     logout: () => void
 }
 type CommonType = MDTP & MSTP
 
 const Login = (props: CommonType) => {
     const onSubmit = (formData: any) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if (props.isAuth) {
@@ -28,13 +29,13 @@ const Login = (props: CommonType) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl ={props.captchaUrl}/>
         </div>
 
     )
 }
 
-const LoginForm = (props: PropsWithChildren<InjectedFormProps<{}, {}, string>>) => {
+const LoginForm: React.FC<InjectedFormProps<any, CommonType> & CommonType>  = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field placeholder={"Email"} name={"email"} component={Input} validate={[required]}/>
@@ -47,17 +48,20 @@ const LoginForm = (props: PropsWithChildren<InjectedFormProps<{}, {}, string>>) 
             <Field component={Input} name={"rememberMe"} type={"checkbox"}/>
             Remember me
         </div>
+        {props.captchaUrl && <img src={props.captchaUrl}/>}
+        {props.captchaUrl && <Field component={Input} name={"captcha"} validate={[required]} placeholder = {"Symbols from image"}/>}
         {props.error && <div className={style.formSummaryError}>{props.error}</div>}
         <div>
             <button>Login</button>
         </div>
     </form>
 }
-const LoginReduxForm = reduxForm({form: "Login"})(LoginForm)
+const LoginReduxForm = reduxForm<any,any>({form: "Login"})(LoginForm)
 
 let mapStateToProps = (state: RootStateType): MSTP => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 export default connect(mapStateToProps, {login, logout})(Login)

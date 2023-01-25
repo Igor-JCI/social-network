@@ -44,7 +44,7 @@ const ProfileDataForm: React.FC<InjectedFormProps<any, ProfileDataFormType> & Pr
     </form>
 }
 
-const ProfileDataFormReduxForm = reduxForm<any,any>({ form: "edit-profile" })(ProfileDataForm)
+const ProfileDataFormReduxForm = reduxForm<any,ProfileDataFormType>({ form: "edit-profile" })(ProfileDataForm)
 /*const ProfileDataFormRedux = reduxForm<{}, ProfileDataFormType>({form: "edit-profile"})(ProfileDataForm)*/
 
 export default ProfileDataFormReduxForm
