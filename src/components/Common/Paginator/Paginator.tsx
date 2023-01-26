@@ -22,7 +22,6 @@ const Paginator = (props: PaginatorType) => {
     let leftPortionPageNumber = (portionNumber - 1) * props.portionSize + 1
     let rightPortionPageNumber = portionNumber * props.portionSize
 
-
     return (
         <div>
             {portionNumber > 1 &&
@@ -30,8 +29,6 @@ const Paginator = (props: PaginatorType) => {
                     setPortionNumber(portionNumber - 1)
                 }}>PREV</button>
             }
-
-
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
@@ -40,7 +37,6 @@ const Paginator = (props: PaginatorType) => {
                             {[styles.selectedPage]: props.currentPage === p},
                             styles.pageNumber
                         )}
-                        //className={props.currentPage === p ? styles.selectedPage : ''}
                         onClick={(e: React.MouseEvent<HTMLElement>) => {
                             props.onPageChanged(p)
                         }}>{p}</span>
@@ -49,9 +45,7 @@ const Paginator = (props: PaginatorType) => {
                 portionCount>portionNumber &&
                 <button onClick={() =>{setPortionNumber(portionNumber+1)}}>NEXT</button>
             }
-
         </div>
     )
 }
-
 export default Paginator

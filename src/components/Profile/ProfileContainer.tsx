@@ -52,7 +52,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     constructor(props: ProfileContainerPropsType) {
         super(props);
     }
-
     refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
@@ -64,11 +63,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
     }
-
     componentDidMount() {
         this.refreshProfile()
     }
-
     componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
         if (this.props.match.params.userId != prevProps.match.params.userId) {
             this.refreshProfile()

@@ -1,10 +1,6 @@
 import preloader from "../../../assets/images/preloader.svg";
 import React from "react";
 
-
 export const Preloader = () => {
-  return (
-      <div><img src={preloader} style={{backgroundColor:"white"}}/> </div>
-  )
-
+  return <div><img src={preloader} style={{backgroundColor:"white"}}/> </div>
 }
