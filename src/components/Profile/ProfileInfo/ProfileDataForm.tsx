@@ -10,7 +10,7 @@ import {Simulate} from "react-dom/test-utils";
 type ProfileDataFormType = {
     profile: ProfileType
 }
-//React.FC<InjectedFormProps<{}, ProfileDataFormType> & ProfileDataFormType>
+
 const ProfileDataForm: React.FC<InjectedFormProps<any, ProfileDataFormType> & ProfileDataFormType> = ({ handleSubmit, profile, error, ...props }) => {
     console.log(error)
     return <form onSubmit={handleSubmit}>
