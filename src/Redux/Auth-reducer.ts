@@ -12,7 +12,7 @@ export type AuthReducerType = {
     email: string,
     login: string,
     isAuth: boolean,
-    captchaUrl?: null | string|undefined
+    captchaUrl?: null | string | undefined
 }
 let initialState: AuthReducerType = {
     id: "",
@@ -29,6 +29,9 @@ export const authReducer = (state = initialState, action: ActionsType): AuthRedu
         }
         case GET_CAPTCHA_URL_SUCCESS: {
             return {...state, captchaUrl:action.payload}
+            /*let newState = {...state}
+            newState.captchaUrl = action.payload
+            return newState*/
         }
         default:
             return state
@@ -54,7 +57,7 @@ export const getUserData = () => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha:string): AppThunk => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string): AppThunk => {
     return async (dispatch) => {
         let response = await authAPI.login(email, password, rememberMe, captcha)
         if (response.data.resultCode === 0) {

@@ -27,7 +27,6 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
             status: e.currentTarget.value
         })
     }
-
     componentDidUpdate(prevProps: { status: string }, prevState: any) {
         console.log(prevState)
         console.log(prevProps)
@@ -52,3 +51,4 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
             </div>)
     }
 }
+

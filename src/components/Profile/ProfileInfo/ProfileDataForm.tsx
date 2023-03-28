@@ -1,10 +1,9 @@
-import React, {PropsWithChildren} from "react";
+import React from "react";
 import {Input, Textarea} from "../../Common/FormsControls/FormsControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {ProfileType} from "../ProfileContainer";
 import s from "./ProfileInfo.module.css"
 import style from "../../Common/FormsControls/FormsControls.module.css";
-import {Simulate} from "react-dom/test-utils";
 
 
 type ProfileDataFormType = {

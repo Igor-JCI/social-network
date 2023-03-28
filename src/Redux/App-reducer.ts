@@ -18,6 +18,9 @@ export const appReducer = (state = initialState, action: ActionsType): AuthReduc
     switch (action.type) {
         case INITIALIZED_SUCCESS: {
             return {...state, initialized: true}
+            /*let newState = {...state}
+            newState.initialized=true
+            return newState*/
         }
         default:
             return state
