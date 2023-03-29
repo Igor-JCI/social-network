@@ -29,9 +29,6 @@ export const authReducer = (state = initialState, action: ActionsType): AuthRedu
         }
         case GET_CAPTCHA_URL_SUCCESS: {
             return {...state, captchaUrl:action.payload}
-            /*let newState = {...state}
-            newState.captchaUrl = action.payload
-            return newState*/
         }
         default:
             return state
