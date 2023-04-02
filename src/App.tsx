@@ -105,7 +105,6 @@ const mapStateToProps = (state: RootStateType): MSTP => {
         initialized: state.app.initialized
     }
 }
-
 export const AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App)
