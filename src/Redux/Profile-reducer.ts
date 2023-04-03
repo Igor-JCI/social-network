@@ -60,7 +60,6 @@ let initialState = {
     },
     status: ""
 }
-
 const profileReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case ADD_POST: {
