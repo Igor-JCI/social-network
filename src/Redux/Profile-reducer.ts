@@ -10,7 +10,6 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE"
 const SET_STATUS = "SET_STATUS"
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS"
-
 type PostsArrayType = {
     id: string,
     message: string,
