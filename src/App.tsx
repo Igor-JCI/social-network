@@ -99,7 +99,6 @@ class App extends React.Component<CommonType> {
         );
     }
 }
-
 const mapStateToProps = (state: RootStateType): MSTP => {
     return {
         initialized: state.app.initialized
