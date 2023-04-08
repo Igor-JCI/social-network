@@ -12,7 +12,6 @@ type ProfilePropsType = {
     savePhoto: (file: File) => void,
     saveProfile: (aboutMe: string, fullName: string, lookingForAJob: boolean, lookingForAJobDescription: string, contacts:ContactsType) =>Promise<void>
 }
-
 const Profile = (props: ProfilePropsType) => {
     return (
         <div>
