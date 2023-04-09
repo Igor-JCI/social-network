@@ -3,7 +3,6 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ContactsType, ProfileType} from "./ProfileContainer";
 
-
 type ProfilePropsType = {
     profile: ProfileType,
     status: string,
