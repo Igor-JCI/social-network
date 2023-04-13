@@ -5,7 +5,6 @@ import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileStatusWIthHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png"
 import ProfileDataFormRedux from "./ProfileDataForm";
-
 type ProfileInfoType = {
     profile: ProfileType,
     status: string,
