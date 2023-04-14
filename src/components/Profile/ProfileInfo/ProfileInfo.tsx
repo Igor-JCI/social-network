@@ -22,7 +22,6 @@ type ProfileDataType = {
     isOwner: boolean,
     goToEditMode: () => void
 }
-
 export const ProfileInfo: React.FC<ProfileInfoType> = ({saveProfile, ...props}) => {
     let [editMode, setEditMode] = useState(false)
 
