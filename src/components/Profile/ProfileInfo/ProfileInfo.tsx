@@ -55,7 +55,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({saveProfile, ...props}) 
         </div>
     )
 }
-
 const ProfileData = (props: ProfileDataType) => {
     return <div>
         {
