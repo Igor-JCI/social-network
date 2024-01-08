@@ -1,5 +1,5 @@
 import {ActionsType, getCaptchaUrlSuccessType, setUserDataType,} from "./Store";
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {authAPI, securityAPI} from "../API/API";
 import {ThunkDispatch} from "redux-thunk";
 import {AppThunk, RootStateType} from "./Redux-store";
@@ -28,7 +28,7 @@ export const authReducer = (state = initialState, action: ActionsType): AuthRedu
             return {...state, ...action.payload}
         }
         case GET_CAPTCHA_URL_SUCCESS: {
-            return {...state, captchaUrl:action.payload}
+            return {...state, captchaUrl: action.payload}
         }
         default:
             return state
@@ -69,7 +69,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
         }
     }
 }
-export const logout = () => {
+export const logout = (): any => {
     return async (dispatch: ThunkDispatch<RootStateType, {}, ActionsType>) => {
         let response = await authAPI.logout()
         if (response.data.resultCode === 0) {
