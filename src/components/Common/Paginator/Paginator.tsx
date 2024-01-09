@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styles from "./Paginator.module.css";
 import cn from "classnames"
+import {Button, Flex} from 'antd';
 
 type PaginatorType = {
     totalItemsCount: number,
@@ -22,12 +23,18 @@ const Paginator = (props: PaginatorType) => {
     let leftPortionPageNumber = (portionNumber - 1) * props.portionSize + 1
     let rightPortionPageNumber = portionNumber * props.portionSize
 
+
     return (
-        <div>
+        <div  >
             {portionNumber > 1 &&
-                <button onClick={() => {
+                <Flex gap="small" wrap="wrap">
+                    <Button className={styles.button} size={"small"} type="text" onClick={() => {
+                        setPortionNumber(portionNumber - 1)
+                    }}>PREV</Button>
+                </Flex>
+                /*<button onClick={() => {
                     setPortionNumber(portionNumber - 1)
-                }}>PREV</button>
+                }}>PREV</button>*/
             }
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -42,8 +49,15 @@ const Paginator = (props: PaginatorType) => {
                         }}>{p}</span>
                 })}
             {
-                portionCount>portionNumber &&
-                <button onClick={() =>{setPortionNumber(portionNumber+1)}}>NEXT</button>
+                portionCount > portionNumber &&
+                <Flex gap="small" wrap="wrap">
+                    <Button size={"small"} type="text" onClick={() => {
+                        setPortionNumber(portionNumber + 1)
+                    }}>NEXT</Button>
+                </Flex>
+                /*<button onClick={() => {
+                    setPortionNumber(portionNumber + 1)
+                }}>NEXT</button>*/
             }
         </div>
     )

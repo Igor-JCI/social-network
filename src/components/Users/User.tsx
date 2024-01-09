@@ -3,6 +3,7 @@ import styles from "./users.module.css";
 import userPhoto from "../../assets/images/user.png"
 import {UsersType} from "../../Redux/Users-reducer";
 import {NavLink} from "react-router-dom";
+import {Button, Flex} from 'antd';
 
 export type UserType = {
     user: UsersType,
@@ -12,6 +13,7 @@ export type UserType = {
 }
 
 const User = (props: UserType) => {
+
     return (
         <div>
             <span>
@@ -22,28 +24,32 @@ const User = (props: UserType) => {
                 </NavLink>
             </div>
                 <div>
-                {props.user.followed
-                    ? <button
-                        disabled={props.followingInProgress.some(id => id === props.user.id)}
-                        onClick={() => {
-                            props.unfollow(props.user.id)
-                        }}>Unfollow</button>
+                {
+                    props.user.followed
+                        ? <Flex gap="small" wrap="wrap">
+                            <Button size={"small"} disabled={props.followingInProgress.some(id => id === props.user.id)}
+                                    onClick={() => {
+                                        props.unfollow(props.user.id)
+                                    }}>Unfollow</Button>
+                        </Flex>
 
-                    : <button
-                        disabled={props.followingInProgress.some(id => id === props.user.id)}
-                        onClick={() => {
-                            props.follow(props.user.id)
-                        }}>Follow</button>}
+                        : <Flex gap="small" wrap="wrap">
+                            <Button size={"small"} disabled={props.followingInProgress.some(id => id === props.user.id)}
+                                    onClick={() => {
+                                        props.follow(props.user.id)
+                                    }}>Follow</Button>
+                        </Flex>
+                }
             </div>
             </span>
             <span>
                 <span>
-                            <div>{props.user.name}</div>
+                            <div>Name: {props.user.name}</div>
                             <div>{props.user.status}</div>
                         </span>
                         <span>
-                            <div>{"u.location.country"}</div>
-                            <div>{"u.location.city"}</div>
+                            <div>{"location-country"}</div>
+                            <div>{"location-city"}</div>
                         </span>
             </span>
         </div>

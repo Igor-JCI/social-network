@@ -5,6 +5,8 @@ import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileStatusWIthHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png"
 import ProfileDataFormRedux from "./ProfileDataForm";
+import {Button, Flex} from 'antd';
+
 type ProfileInfoType = {
     profile: ProfileType,
     status: string,
@@ -59,7 +61,9 @@ const ProfileData = (props: ProfileDataType) => {
     return <div>
         {
             props.isOwner && <div>
-                <button onClick={props.goToEditMode}>Edit</button>
+                <Flex gap="small" wrap="wrap">
+                    <Button type="primary" onClick={props.goToEditMode}>Edit</Button>
+                </Flex>
             </div>
         }
         <div>

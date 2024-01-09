@@ -5,6 +5,7 @@ import {PostsArrayType} from "../../../App";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../Utils/Validators/validators";
 import {Textarea} from "../../Common/FormsControls/FormsControls";
+import { Button, Flex } from 'antd';
 
 type MyPostsPropsType = {
     posts: Array<PostsArrayType>
