@@ -10,8 +10,9 @@ const Post = (props: PostTypeProps) => {
     return (
         <div className={`${s.item} ${s.active}`}>
             <img src="https://freelance.ru/img/portfolio/pics/00/3D/5C/4021338.jpg"/>
-            {props.message}
-            <div>
+            <span>{props.message}</span>
+
+            <div className={s.span}>
                 <span>like</span> {props.likesCount}
             </div>
         </div>

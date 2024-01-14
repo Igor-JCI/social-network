@@ -16,7 +16,11 @@
 }
 
 .button {
-    display: block;
+    display: inline-flex;
+    justify-content: flex-start;
 
     /*grid-template-columns: -1fr -1fr -1fr;*/
+}
+.div {
+    margin-bottom: 25px;
 }

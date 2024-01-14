@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styles from "./Paginator.module.css";
 import cn from "classnames"
 import {Button, Flex} from 'antd';
+import { Pagination } from 'antd';
 
 type PaginatorType = {
     totalItemsCount: number,
@@ -25,13 +26,14 @@ const Paginator = (props: PaginatorType) => {
 
 
     return (
-        <div  >
+        <div className={styles.div}>
             {portionNumber > 1 &&
-                <Flex gap="small" wrap="wrap">
-                    <Button className={styles.button} size={"small"} type="text" onClick={() => {
+                <Flex gap="small" wrap="wrap" className={styles.button}>
+                    <Button size={"small"} type="text" onClick={() => {
                         setPortionNumber(portionNumber - 1)
                     }}>PREV</Button>
                 </Flex>
+
                 /*<button onClick={() => {
                     setPortionNumber(portionNumber - 1)
                 }}>PREV</button>*/
@@ -50,7 +52,7 @@ const Paginator = (props: PaginatorType) => {
                 })}
             {
                 portionCount > portionNumber &&
-                <Flex gap="small" wrap="wrap">
+                <Flex gap="small" wrap="wrap" className={styles.button}>
                     <Button size={"small"} type="text" onClick={() => {
                         setPortionNumber(portionNumber + 1)
                     }}>NEXT</Button>

@@ -1,6 +1,15 @@
-import preloader from "../../../assets/images/preloader.svg";
 import React from "react";
+import {Flex, Spin} from 'antd';
 
 export const Preloader = () => {
-  return <div><img src={preloader} style={{backgroundColor:"white"}}/> </div>
+    return <div>
+        <Flex gap="large" vertical>
+            <Flex gap="large">
+                <Spin tip="Loading" size="large">
+                    <div className="content"/>
+                </Spin>
+            </Flex>
+        </Flex>
+    </div>
 }
+

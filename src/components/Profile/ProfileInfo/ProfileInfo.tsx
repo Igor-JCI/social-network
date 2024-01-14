@@ -5,7 +5,10 @@ import {Preloader} from "../../Common/Preloader/Preloader";
 import {ProfileStatusWIthHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png"
 import ProfileDataFormRedux from "./ProfileDataForm";
-import {Button, Flex} from 'antd';
+import {Button, Descriptions, Flex, Upload} from 'antd';
+import {FacebookOutlined, UploadOutlined} from '@ant-design/icons';
+import type {UploadProps} from 'antd';
+
 
 type ProfileInfoType = {
     profile: ProfileType,
@@ -44,15 +47,25 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({saveProfile, ...props}) 
     return (
         <div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
-                {props.isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
+                <div>
+                    <div className={s.mainPhoto}>
+                        <img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
+                    </div>
+                    {props.isOwner &&
+                        <div className={s.image}>
+                            <input type="file" onChange={onMainPhotoSelected}/>
+                        </div>
+                    }
+                </div>
+
 
                 {editMode ?
                     <ProfileDataFormRedux profile={props.profile} initialValues={props.profile} onSubmit={onSubmit}/> :
                     <ProfileData goToEditMode={() => setEditMode(true)} profile={props.profile}
                                  isOwner={props.isOwner}/>}
-
-                <ProfileStatusWIthHooks status={props.status} updateStatus={props.updateStatus}/>
+                <div className={s.status}>
+                    <ProfileStatusWIthHooks status={props.status} updateStatus={props.updateStatus}/>
+                </div>
             </div>
         </div>
     )
@@ -66,21 +79,25 @@ const ProfileData = (props: ProfileDataType) => {
                 </Flex>
             </div>
         }
-        <div>
-            <b>Full Name</b>: {props.profile.fullName}
-        </div>
-        <div>
-            <b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}
-        </div>
-        {
-            props.profile.lookingForAJob &&
+
+        <div className={s.content}>
             <div>
-                <b>My professional skills</b>: {props.profile.lookingForAJobDescription}
+                <b>Full Name</b>: {props.profile.fullName}
             </div>
-        }
-        <div>
-            <b>About me</b>: {props.profile.aboutMe}
+            <div>
+                <b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}
+            </div>
+            {
+                props.profile.lookingForAJob &&
+                <div>
+                    <b>My professional skills</b>: {props.profile.lookingForAJobDescription}
+                </div>
+            }
+            <div>
+                <b>About me</b>: {props.profile.aboutMe}
+            </div>
         </div>
+
         <div>
             <b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
             return <Contact key={key}

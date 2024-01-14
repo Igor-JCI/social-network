@@ -7,3 +7,8 @@
 .posts {
     margin-top: 10px;
 }
+
+.title {
+    color: rgba(31,37,216,0.93);
+    margin-bottom: 20px;
+}

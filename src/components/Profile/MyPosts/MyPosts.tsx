@@ -5,7 +5,8 @@ import {PostsArrayType} from "../../../App";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../Utils/Validators/validators";
 import {Textarea} from "../../Common/FormsControls/FormsControls";
-import { Button, Flex } from 'antd';
+
+import {Divider, Space, Tag} from 'antd';
 
 type MyPostsPropsType = {
     posts: Array<PostsArrayType>
@@ -19,7 +20,9 @@ const MyPosts = React.memo((props: MyPostsPropsType) => {
     }
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <Space wrap className={s.title}>
+                <Tag color="geekblue"><h3>My posts</h3></Tag>
+            </Space>
             <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {
