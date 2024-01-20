@@ -34,9 +34,6 @@ const Paginator = (props: PaginatorType) => {
                     }}>PREV</Button>
                 </Flex>
 
-                /*<button onClick={() => {
-                    setPortionNumber(portionNumber - 1)
-                }}>PREV</button>*/
             }
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -57,9 +54,6 @@ const Paginator = (props: PaginatorType) => {
                         setPortionNumber(portionNumber + 1)
                     }}>NEXT</Button>
                 </Flex>
-                /*<button onClick={() => {
-                    setPortionNumber(portionNumber + 1)
-                }}>NEXT</button>*/
             }
         </div>
     )
