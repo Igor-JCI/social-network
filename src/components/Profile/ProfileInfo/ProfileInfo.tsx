@@ -6,8 +6,6 @@ import {ProfileStatusWIthHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/user.png"
 import ProfileDataFormRedux from "./ProfileDataForm";
 import {Button, Descriptions, Flex, Upload} from 'antd';
-import {FacebookOutlined, UploadOutlined} from '@ant-design/icons';
-import type {UploadProps} from 'antd';
 
 
 type ProfileInfoType = {
