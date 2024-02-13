@@ -1,6 +1,6 @@
 import React, {ComponentType, useEffect} from 'react';
 import './App.css';
-import {BrowserRouter, NavLink, Redirect, Route, Switch, withRouter} from 'react-router-dom';
+import {BrowserRouter, HashRouter, NavLink, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {connect, Provider} from "react-redux";
 import store, {RootStateType} from "./Redux/Redux-store";
 import {compose} from "redux";
@@ -107,7 +107,7 @@ const App = (props: CommonType) => {
         <Preloader/>
     }
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Layout>
                 <AppHeader/>
                 <Content style={{padding: '0 48px'}}>
@@ -138,21 +138,27 @@ const App = (props: CommonType) => {
                                     </React.Suspense>
                                 }}/>
                                 <Route exact path="/" render={() => <Redirect from="/" to="/profile"/>}/>
+
                                 <Route path="/profile/:userId?"
                                        render={() => <React.Suspense fallback={<Preloader/>}> <ProfileContainer/>
                                        </React.Suspense>}/>
+
                                 <Route path="/login" render={() => <React.Suspense fallback={<Preloader/>}>
                                     <LoginPage/>
                                 </React.Suspense>}/>
+
                                 <Route path="/users" render={() => <React.Suspense fallback={<Preloader/>}>
                                     <ContainerForUsersComponent/>
                                 </React.Suspense>}/>
+
                                 <Route path="/News" render={() => <React.Suspense fallback={<Preloader/>}>
                                     <News/>
                                 </React.Suspense>}/>
+
                                 <Route path="/Music" render={() => <React.Suspense fallback={<Preloader/>}>
                                     <Music/>
                                 </React.Suspense>}/>
+
                                 <Route path="/Settings" render={() => <React.Suspense fallback={<Preloader/>}>
                                     <Settings/>
                                 </React.Suspense>}/>
@@ -167,7 +173,7 @@ const App = (props: CommonType) => {
                 </Footer>
             </Layout>
 
-        </BrowserRouter>
+        </HashRouter>
     )
 
 }

@@ -29,11 +29,11 @@ let initialState = {
         {id: "6", name: "Valera"},
     ],
     messages: [
-        {id: "1", message: "Hi"},
-        {id: "2", message: "How is your it-kamasutra?"},
-        {id: "3", message: "Yo"},
-        {id: "4", message: "Yo"},
-        {id: "5", message: "Yo"}
+        {id: "1", message: "Hello, my name is Igor. Nice to meet you"},
+        {id: "2", message: "I'm a frontend developer"},
+        {id: "3", message: "What project are you working on now?"},
+        {id: "4", message: "Always open for communication"},
+        {id: "5", message: "I am currently looking for new career opportunities"}
     ],
 }
 
